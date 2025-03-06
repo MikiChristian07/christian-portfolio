@@ -50,7 +50,7 @@ const services = [
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Full Stack Developer",
     icon: backend,
   },
   {
@@ -109,18 +109,18 @@ const technologies = [
     icon: figma,
   },
   {
-    name: "docker",
-    icon: docker,
+    name: "wordpress",
+    icon: wordpress,
   },
 ];
 
 const experiences = [
   {
-    title: "React.js Developer",
-    company_name: "Starbucks",
+    title: "Junior Software Developer",
+    company_name: "Genesys Tech Hub",
     icon: starbucks,
     iconBg: "#383E56",
-    date: "March 2020 - April 2021",
+    date: "March 2022 - Aug 2022",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -129,11 +129,11 @@ const experiences = [
     ],
   },
   {
-    title: "React Native Developer",
-    company_name: "Tesla",
+    title: "Web Developer / Instructor",
+    company_name: "Foretrust Digital Consulting",
     icon: tesla,
     iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
+    date: "Sep 2023 - Jan 2024",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -143,10 +143,10 @@ const experiences = [
   },
   {
     title: "Web Developer",
-    company_name: "Shopify",
+    company_name: "FMG Nigeria",
     icon: shopify,
     iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
+    date: "Mar 2024 - Dec 2024",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -156,10 +156,10 @@ const experiences = [
   },
   {
     title: "Full stack Developer",
-    company_name: "Meta",
+    company_name: "Ravens and Macaw",
     icon: meta,
     iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
+    date: "Jan 2025 - Present",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
