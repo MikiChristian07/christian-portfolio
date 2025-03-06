@@ -110,7 +110,7 @@ const technologies = [
   },
   {
     name: "wordpress",
-    icon: wordpress,
+    icon: docker,
   },
 ];
 
