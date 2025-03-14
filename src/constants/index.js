@@ -19,10 +19,10 @@ import {
   starbucks,
   tesla,
   shopify,
-  carrent,
-  jobit,
-  tripguide,
+  tripleawriters,
+  vuejobs,
   threejs,
+  shopapi,
 } from "../assets";
 
 export const navLinks = [
@@ -215,7 +215,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
+    image: vuejobs,
     source_code_link: "https://github.com/MikiChristian07/Vue-Jobs",
   },
   {
@@ -236,7 +236,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: tripleawriters,
     source_code_link: "https://tripleawriters.com/",
   },
   {
@@ -257,7 +257,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
+    image: shopapi,
     source_code_link: "https://github.com/MikiChristian07/node-shop-api",
   },
 ];
