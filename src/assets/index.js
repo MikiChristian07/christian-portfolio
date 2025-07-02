@@ -25,6 +25,9 @@ import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
+import fmg from "./company/fmg.png";
+import randm from "./company/randm.png";
+import genesys from "./company/genesys.png"
 import vuejobs from "./vuejobs.png"
 import jobit from "./jobit.png";
 import shopapi from "./shopapi.png";
@@ -57,6 +60,9 @@ export {
   shopify,
   starbucks,
   tesla,
+  fmg,
+  randm,
+  genesys,
   vuejobs,
   jobit,
   tripleawriters,

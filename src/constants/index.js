@@ -18,6 +18,9 @@ import {
   meta,
   starbucks,
   tesla,
+  fmg,
+  randm,
+  genesys,
   shopify,
   tripleawriters,
   vuejobs,
@@ -118,7 +121,7 @@ const experiences = [
   {
     title: "Junior Software Developer",
     company_name: "Genesys Tech Hub",
-    icon: starbucks,
+    icon: genesys,
     iconBg: "#383E56",
     date: "March 2022 - Aug 2022",
     points: [
@@ -129,9 +132,9 @@ const experiences = [
     ],
   },
   {
-    title: "Web Developer / Instructor",
-    company_name: "Foretrust Digital Consulting",
-    icon: tesla,
+    title: "Web Developer",
+    company_name: "Foretrust Digital Center",
+    icon: fmg,
     iconBg: "#E6DEDD",
     date: "Sep 2023 - Jan 2024",
     points: [
@@ -144,7 +147,7 @@ const experiences = [
   {
     title: "Web Developer",
     company_name: "FMG Nigeria",
-    icon: shopify,
+    icon: fmg,
     iconBg: "#383E56",
     date: "Mar 2024 - Dec 2024",
     points: [
@@ -157,7 +160,7 @@ const experiences = [
   {
     title: "Full stack Developer",
     company_name: "Ravens and Macaw",
-    icon: meta,
+    icon: randm,
     iconBg: "#E6DEDD",
     date: "Jan 2025 - Present",
     points: [
@@ -173,9 +176,9 @@ const testimonials = [
   {
     testimonial:
       "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-    name: "Sara Lee",
+    name: "Ifunanya Onyema",
     designation: "CFO",
-    company: "Acme Co",
+    company: "Raven and Macaw",
     image: "https://randomuser.me/api/portraits/women/4.jpg",
   },
   {
@@ -219,7 +222,7 @@ const projects = [
     source_code_link: "https://github.com/MikiChristian07/Vue-Jobs",
   },
   {
-    name: "TripleAwriters",
+    name: "Montana Speedy Title",
     description:
       "Platform connecting writers with clients, allowing users to find writing jobs, access estimated pay rates, and secure projects based on their expertise",
     tags: [
@@ -237,7 +240,7 @@ const projects = [
       },
     ],
     image: tripleawriters,
-    source_code_link: "https://tripleawriters.com/",
+    source_code_link: "https://montanaspeedytitle.com/",
   },
   {
     name: "Shop-Api",
