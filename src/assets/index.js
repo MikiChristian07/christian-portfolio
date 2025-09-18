@@ -30,10 +30,13 @@ import randm from "./company/randm.png";
 import genesys from "./company/genesys.png"
 import vuejobs from "./vuejobs.png"
 import jobit from "./jobit.png";
+import carrent from "./carrent.png";
 import shopapi from "./shopapi.png";
 import tripleawriters from "./tripleawriters.png";
 import ravenandmacaw from "./ravenandmacaw.png";
 import mst from "./mst.png";
+import talatech from "./talatech.png";
+import merryhill from "./merryhill.png";
 
 
 export {
@@ -67,8 +70,11 @@ export {
   genesys,
   vuejobs,
   jobit,
+  carrent,
   tripleawriters,
   shopapi,
   ravenandmacaw,
   mst,
+  talatech,
+  merryhill,
 };

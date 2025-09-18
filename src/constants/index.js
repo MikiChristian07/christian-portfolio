@@ -26,8 +26,11 @@ import {
   ravenandmacaw,
   mst,
   vuejobs,
+  carrent,
   threejs,
   shopapi,
+  talatech,
+  merryhill,
 } from "../assets";
 
 export const navLinks = [
@@ -205,7 +208,7 @@ const projects = [
   {
     name: "Raven and Macaw",
     description:
-      "Designed, developed, and deployed the official website for Raven & Macaw, a business consulting firm, with a modern responsive layout, clear service presentation, and optimized user experience.",
+      "Designed, developed, and deployed the official website for Raven & Macaw, a business consulting firm, with a modern responsive layout, and optimized user experience.",
     tags: [
       {
         name: "Next.js",
@@ -263,7 +266,70 @@ const projects = [
       },
     ],
     image: shopapi,
-    source_code_link: "https://github.com/MikiChristian07/node-shop-api",
+    source_code_link: "https://shop-api-demo.herokuapp.com",
+  },
+  {
+    name: "Vue Jobs Platform",
+    description:
+      "A comprehensive job board platform built with Vue.js, featuring job listings, company profiles, and application tracking with modern UI/UX design",
+    tags: [
+      {
+        name: "React.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Sanity",
+        color: "red-text-gradient",
+      },
+      {
+        name: "CSS3",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: vuejobs,
+    source_code_link: "https://vue-jobs-zeta.vercel.app/",
+  },
+  {
+    name: "Talatech",
+    description:
+      "Built and deployed the official website for TalaTech, a digital services platform that helps service-based businesses (restaurants, barbers, etc.) establish a strong online presence",
+    tags: [
+      {
+        name: "Wordpress",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Elementor",
+        color: "green-text-gradient",
+      },
+      {
+        name: "CSS",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: talatech,
+    source_code_link: "https://talatech.io",
+  },
+  {
+    name: "EyeCare Merry Hill Revamp",
+    description:
+      "Developed and deployed the website for EyeCare Merry Hill, an independent eye-health and luxury optical retailer based in Merry Hill Shopping Centre",
+    tags: [
+      {
+        name: "Wordpress",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Elementor",
+        color: "green-text-gradient",
+      },
+      {
+        name: "CSS",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: merryhill,
+    source_code_link: "https://merryhill.ravenvision.co.uk/",
   },
 ];
 

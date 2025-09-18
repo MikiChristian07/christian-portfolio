@@ -28,9 +28,18 @@ const Stars = (props) => {
 };
 
 const StarsCanvas = () => {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return <div className='w-full h-auto absolute inset-0 z-[-1]'></div>;
+  }
+
   return (
     <div className='w-full h-auto absolute inset-0 z-[-1]'>
-      <Canvas camera={{ position: [0, 0, 1] }}>
+      <Canvas 
+        camera={{ position: [0, 0, 1] }}
+        onError={() => setHasError(true)}
+      >
         <Suspense fallback={null}>
           <Stars />
         </Suspense>

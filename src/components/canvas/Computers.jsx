@@ -7,6 +7,27 @@ import CanvasLoader from "../Loader";
 const Computers = ({ isMobile }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
 
+  // Validate the loaded model
+  React.useEffect(() => {
+    if (computer.scene) {
+      computer.scene.traverse((child) => {
+        if (child.isMesh && child.geometry) {
+          // Check for NaN values in position attributes
+          const position = child.geometry.attributes.position;
+          if (position) {
+            for (let i = 0; i < position.array.length; i++) {
+              if (isNaN(position.array[i])) {
+                console.warn('Found NaN in geometry position, attempting to fix...');
+                position.array[i] = 0;
+              }
+            }
+            position.needsUpdate = true;
+          }
+        }
+      });
+    }
+  }, [computer]);
+
   return (
     <mesh>
       <hemisphereLight intensity={0.15} groundColor='black' />
@@ -31,6 +52,7 @@ const Computers = ({ isMobile }) => {
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     // Add a listener for changes to the screen size
@@ -53,6 +75,17 @@ const ComputersCanvas = () => {
     };
   }, []);
 
+  if (hasError) {
+    return (
+      <div className="w-full h-auto absolute inset-0 z-[-1] flex items-center justify-center">
+        <div className="text-white text-center">
+          <h3 className="text-xl mb-2">3D Model Loading Error</h3>
+          <p className="text-secondary">Unable to load 3D computer model</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Canvas
       frameloop='demand'
@@ -60,6 +93,7 @@ const ComputersCanvas = () => {
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
+      onError={() => setHasError(true)}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
