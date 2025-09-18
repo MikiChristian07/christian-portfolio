@@ -32,6 +32,8 @@ import vuejobs from "./vuejobs.png"
 import jobit from "./jobit.png";
 import shopapi from "./shopapi.png";
 import tripleawriters from "./tripleawriters.png";
+import ravenandmacaw from "./ravenandmacaw.png";
+import mst from "./mst.png";
 
 
 export {
@@ -67,4 +69,6 @@ export {
   jobit,
   tripleawriters,
   shopapi,
+  ravenandmacaw,
+  mst,
 };
