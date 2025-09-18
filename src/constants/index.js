@@ -23,6 +23,8 @@ import {
   genesys,
   shopify,
   tripleawriters,
+  ravenandmacaw,
+  mst,
   vuejobs,
   threejs,
   shopapi,
@@ -159,7 +161,7 @@ const experiences = [
   },
   {
     title: "Full stack Developer",
-    company_name: "Ravens and Macaw",
+    company_name: "Raven and Macaw",
     icon: randm,
     iconBg: "#E6DEDD",
     date: "Jan 2025 - Present",
@@ -201,16 +203,16 @@ const testimonials = [
 
 const projects = [
   {
-    name: "Vue Jobs",
+    name: "Raven and Macaw",
     description:
-      "Web-based platform that allows users Find, apply, and manage developer job opportunities from various employers, offering a seamless and efficient job-hunting experience.",
+      "Designed, developed, and deployed the official website for Raven & Macaw, a business consulting firm, with a modern responsive layout, clear service presentation, and optimized user experience.",
     tags: [
       {
-        name: "react",
+        name: "Next.js",
         color: "blue-text-gradient",
       },
       {
-        name: "NodeJs",
+        name: "GraphQL",
         color: "green-text-gradient",
       },
       {
@@ -218,8 +220,8 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: vuejobs,
-    source_code_link: "https://github.com/MikiChristian07/Vue-Jobs",
+    image: ravenandmacaw,
+    source_code_link: "https://ravenandmacaw.com",
   },
   {
     name: "Montana Speedy Title",
@@ -239,7 +241,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: tripleawriters,
+    image: mst,
     source_code_link: "https://montanaspeedytitle.com/",
   },
   {
