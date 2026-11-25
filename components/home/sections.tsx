@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { person } from "@/content/person";
@@ -7,6 +9,7 @@ import { Glyph } from "@/components/glyph";
 import { UliLine } from "@/components/uli-line";
 import { WorkRow } from "@/components/home/work-row";
 import { ContactForm } from "@/components/home/contact-form";
+import { track } from "@/lib/analytics";
 
 function SectionHead({ id, title, intro }: { id: string; title: string; intro?: string }) {
   return (
@@ -41,7 +44,13 @@ export function WorkSection() {
         <ul className="mt-10 grid gap-x-10 gap-y-14 md:grid-cols-2">
           {shippedSites.map((s) => (
             <li key={s.name}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="group block">
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("outbound_click", { target: "shipped_site" })}
+                className="group block"
+              >
                 <span className="block overflow-hidden border border-rule">
                   <Image
                     src={s.image}
@@ -222,7 +231,7 @@ export function ContactSection() {
             <div>
               <dt className="text-sm text-ink-muted">Email</dt>
               <dd>
-                <a href={`mailto:${person.contact.email}`} className="link">
+                <a href={`mailto:${person.contact.email}`} onClick={() => track("outbound_click", { target: "email" })} className="link">
                   {person.contact.email}
                 </a>
               </dd>
@@ -230,10 +239,10 @@ export function ContactSection() {
             <div>
               <dt className="text-sm text-ink-muted">Elsewhere</dt>
               <dd className="flex gap-6">
-                <a href={person.links.linkedin} className="link" rel="me noopener" target="_blank">
+                <a href={person.links.linkedin} onClick={() => track("outbound_click", { target: "linkedin" })} className="link" rel="me noopener" target="_blank">
                   LinkedIn
                 </a>
-                <a href={person.links.github} className="link" rel="me noopener" target="_blank">
+                <a href={person.links.github} onClick={() => track("outbound_click", { target: "github" })} className="link" rel="me noopener" target="_blank">
                   GitHub
                 </a>
               </dd>

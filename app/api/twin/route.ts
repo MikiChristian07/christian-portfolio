@@ -1,3 +1,7 @@
+import { randomUUID } from "node:crypto";
+import { SeverityNumber } from "@opentelemetry/api-logs";
+import { OpenAI as PostHogOpenAI } from "@posthog/ai/openai";
+import { PostHog } from "posthog-node";
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { twinRequest, type TwinEvent } from "@/lib/twin/schema";
@@ -5,12 +9,40 @@ import { systemPrompt } from "@/lib/twin/prompt";
 import { createToolRunner, tools } from "@/lib/twin/tools";
 import { checkLimits } from "@/lib/twin/rate-limit";
 import { describeContext } from "@/lib/twin/context";
+import { posthogLogProvider, twinLog } from "@/instrumentation";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
 const MODEL = process.env.OPENAI_MODEL ?? "gpt-5.4-mini";
 const MAX_TOOL_ROUNDS = 3;
+const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
+
+if (process.env.NODE_ENV !== "production") {
+  if (!posthogKey) {
+    console.warn(
+      "NEXT_PUBLIC_POSTHOG_KEY variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once NEXT_PUBLIC_POSTHOG_KEY is configured",
+    );
+  }
+  if (!posthogHost) {
+    console.warn(
+      "NEXT_PUBLIC_POSTHOG_HOST variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once NEXT_PUBLIC_POSTHOG_HOST is configured",
+    );
+  }
+}
+
+function createPostHog() {
+  if (!posthogKey || !posthogHost) return null;
+  return new PostHog(posthogKey, {
+    host: posthogHost,
+    privacyMode: false,
+    flushAt: 1,
+    flushInterval: 0,
+    requestTimeout: 2_000,
+    fetchRetryCount: 0,
+  });
+}
 
 const json = (status: number, body: TwinEvent) =>
   new Response(JSON.stringify(body) + "\n", { status, headers: { "Content-Type": "application/x-ndjson" } });
@@ -65,16 +97,26 @@ export async function POST(req: Request) {
     return json(limit.reason === "visitor" ? 429 : 503, { t: "error", code: limit.reason === "unavailable" ? "unavailable" : "rate_limited", message });
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  const openaiApiKey = process.env.OPENAI_API_KEY;
+  if (!openaiApiKey) {
     return json(503, { t: "error", code: "unavailable", message: "The twin isn't connected right now. Everything it knows is on this page." });
   }
 
-  const openai = new OpenAI({ timeout: 45_000, maxRetries: 1 });
+  const posthog = createPostHog();
+  const observedOpenAI = posthog
+    ? new PostHogOpenAI({ apiKey: openaiApiKey, timeout: 45_000, maxRetries: 1, posthog })
+    : null;
+  const openai = new OpenAI({ apiKey: openaiApiKey, timeout: 45_000, maxRetries: 1 });
+  const traceId = randomUUID();
+  const sessionId = parsed.data.conversationId;
   const runTool = createToolRunner();
   const messages: ChatCompletionMessageParam[] = [
     { role: "system", content: systemPrompt(describeContext(parsed.data.context)) },
     ...parsed.data.messages,
   ];
+  const requestStartedAt = Date.now();
+  let modelRounds = 0;
+  let toolCalls = 0;
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
@@ -82,10 +124,24 @@ export async function POST(req: Request) {
       const send = (e: TwinEvent) => controller.enqueue(encoder.encode(JSON.stringify(e) + "\n"));
       try {
         for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
-          const completion = await openai.chat.completions.create(
-            { model: MODEL, messages, tools, stream: true },
-            { signal: req.signal },
-          );
+          const completion = observedOpenAI
+            ? await observedOpenAI.chat.completions.create(
+                {
+                  model: MODEL,
+                  messages,
+                  tools,
+                  stream: true,
+                  posthogDistinctId: sessionId,
+                  posthogTraceId: traceId,
+                  posthogProperties: { $ai_session_id: sessionId },
+                },
+                { signal: req.signal },
+              )
+            : await openai.chat.completions.create(
+                { model: MODEL, messages, tools, stream: true },
+                { signal: req.signal },
+              );
+          modelRounds++;
           const calls: { id: string; name: string; args: string }[] = [];
           let finish: string | null = null;
           for await (const chunk of completion) {
@@ -106,14 +162,53 @@ export async function POST(req: Request) {
             role: "assistant",
             tool_calls: calls.map((c) => ({ id: c.id, type: "function", function: { name: c.name, arguments: c.args } })),
           });
+          toolCalls += calls.length;
           for (const c of calls) {
-            messages.push({ role: "tool", tool_call_id: c.id, content: JSON.stringify(await runTool(c.name, c.args)) });
+            const startedAt = Date.now();
+            const result = await runTool(c.name, c.args);
+            try {
+              posthog?.capture({
+                distinctId: sessionId,
+                event: "$ai_span",
+                properties: {
+                  $ai_trace_id: traceId,
+                  $ai_session_id: sessionId,
+                  $ai_span_id: randomUUID(),
+                  $ai_span_name: c.name,
+                  $ai_latency: (Date.now() - startedAt) / 1_000,
+                },
+              });
+            } catch {
+              /* Observability must not affect the twin's tool response. */
+            }
+            messages.push({ role: "tool", tool_call_id: c.id, content: JSON.stringify(result) });
           }
         }
+        twinLog.emit({
+          body: "twin request completed",
+          severityNumber: SeverityNumber.INFO,
+          attributes: {
+            event: "twin_request_completed",
+            model_rounds: modelRounds,
+            tool_calls: toolCalls,
+            duration_ms: Date.now() - requestStartedAt,
+          },
+        });
         send({ t: "done" });
       } catch (err) {
         if (req.signal.aborted) return;
         const timeout = err instanceof Error && /timed? ?out/i.test(err.message);
+        twinLog.emit({
+          body: "twin request failed",
+          severityNumber: SeverityNumber.ERROR,
+          attributes: {
+            event: "twin_request_failed",
+            failure_kind: timeout ? "timeout" : "completion_error",
+            model_rounds: modelRounds,
+            tool_calls: toolCalls,
+            duration_ms: Date.now() - requestStartedAt,
+          },
+        });
         console.error("[twin] completion failed", err instanceof Error ? err.message : err);
         send({
           t: "error",
@@ -123,6 +218,7 @@ export async function POST(req: Request) {
             : "The twin couldn't answer just now. Try again, or find the answer on this page.",
         });
       } finally {
+        await Promise.all([posthog?.shutdown().catch(() => {}), posthogLogProvider.forceFlush().catch(() => {})]);
         try {
           controller.close();
         } catch {

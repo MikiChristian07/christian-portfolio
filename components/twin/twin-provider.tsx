@@ -39,17 +39,28 @@ const TwinContext = createContext<(TwinState & TwinActions) | null>(null);
 
 const STORAGE_KEY = "twin:conversation:v1";
 
-function load(): TwinMessage[] {
+type StoredConversation = { id: string; messages: TwinMessage[] };
+
+function newConversationId() {
+  return crypto.randomUUID();
+}
+
+function load(): StoredConversation {
+  const id = newConversationId();
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     const parsed: unknown = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
-      (m): m is TwinMessage =>
-        !!m && typeof m === "object" && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
-    );
+    const messages = Array.isArray(parsed) ? parsed : parsed && typeof parsed === "object" && "messages" in parsed ? parsed.messages : [];
+    if (!Array.isArray(messages)) return { id, messages: [] };
+    return {
+      id: parsed && typeof parsed === "object" && !Array.isArray(parsed) && "id" in parsed && typeof parsed.id === "string" ? parsed.id : id,
+      messages: messages.filter(
+        (m): m is TwinMessage =>
+          !!m && typeof m === "object" && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
+      ),
+    };
   } catch {
-    return [];
+    return { id, messages: [] };
   }
 }
 
@@ -65,6 +76,7 @@ function trimForRequest(messages: TwinMessage[]) {
 
 export function TwinProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState<TwinMessage[]>([]);
+  const [conversationId, setConversationId] = useState(newConversationId);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<TwinError | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
@@ -75,8 +87,10 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Restore after hydration so server and client first render match. sessionStorage
     // is an external, client-only store, so syncing it here is the intended exception.
+    const conversation = load();
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMessages(load());
+    setMessages(conversation.messages);
+    setConversationId(conversation.id);
     loaded.current = true;
     setReady(true);
   }, []);
@@ -84,11 +98,11 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!loaded.current || status === "streaming") return;
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ id: conversationId, messages }));
     } catch {
       /* storage full or disabled: the conversation still works in memory */
     }
-  }, [messages, status]);
+  }, [conversationId, messages, status]);
 
   const run = useCallback(async (history: TwinMessage[]) => {
     abortRef.current?.abort();
@@ -112,7 +126,7 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch("/api/twin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: trimForRequest(history), context: currentContextId() }),
+        body: JSON.stringify({ conversationId, messages: trimForRequest(history), context: currentContextId() }),
         signal: controller.signal,
       });
       if (!res.body) throw new Error("no body");
@@ -159,7 +173,7 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
     } finally {
       clearTimeout(timer);
     }
-  }, []);
+  }, [conversationId]);
 
   const send = useCallback(
     (text: string, entry?: Entry) => {
@@ -186,6 +200,7 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
     track("twin_reset", {});
     abortRef.current?.abort();
     setMessages([]);
+    setConversationId(newConversationId());
     setError(null);
     setStatus("idle");
   }, []);
