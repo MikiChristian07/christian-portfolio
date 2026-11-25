@@ -13,6 +13,7 @@ const message = z.discriminatedUnion("role", [
 ]);
 
 export const twinRequest = z.object({
+  conversationId: z.uuid(),
   messages: z
     .array(message)
     .min(1)
