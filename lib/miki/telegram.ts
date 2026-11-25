@@ -8,12 +8,25 @@ import "server-only";
 const real = (v: string | undefined) => (v && !v.startsWith("PASTE_") ? v : undefined);
 const token = real(process.env.TELEGRAM_BOT_TOKEN);
 const ownerChat = real(process.env.OWNER_TELEGRAM_CHAT_ID);
+// Overridable only so tests can route through a recording proxy; defaults to Telegram.
+const apiBase = process.env.TELEGRAM_API_BASE ?? "https://api.telegram.org";
 
 export const telegramConfigured = Boolean(token && ownerChat);
 
 /** Escape text for Telegram's HTML parse mode. Use on anything a visitor wrote. */
 export function esc(text: string) {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/**
+ * Anything a visitor (or an incoming email) wrote. Escaped AND wrapped in <code>, because
+ * Telegram auto-links bare URLs and emails in normal text: a visitor writing
+ * "verify at https://evil.example" must not arrive as a tappable link from Miki.
+ * Code spans are never auto-linked, are visibly marked as quoted input, and tap-to-copy.
+ */
+export function untrusted(text: string, max = 500) {
+  const trimmed = text.length > max ? `${text.slice(0, max)}…` : text;
+  return `<code>${esc(trimmed)}</code>`;
 }
 
 export type InlineButton = { text: string; callback_data: string } | { text: string; url: string };
@@ -25,7 +38,7 @@ export type InlineButton = { text: string; callback_data: string } | { text: str
 export async function sendToOwner(html: string, buttons?: InlineButton[][]): Promise<number | null> {
   if (!token || !ownerChat) return null;
   try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const res = await fetch(`${apiBase}/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

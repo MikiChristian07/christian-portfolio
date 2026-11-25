@@ -1,7 +1,8 @@
 import "server-only";
 import { z } from "zod";
 import type { ChatCompletionFunctionTool } from "openai/resources/chat/completions";
-import { esc, mikiMessage, sendToOwner, telegramConfigured } from "@/lib/miki/telegram";
+import { mikiMessage, sendToOwner, telegramConfigured, untrusted } from "@/lib/miki/telegram";
+import { allowNotification } from "@/lib/miki/notify-limit";
 import { audit } from "@/lib/miki/store";
 
 /**
@@ -77,6 +78,10 @@ async function pushover(message: string) {
  * so nothing goes quiet during the switch. Every notification is audited.
  */
 async function notifyOwner(action: string, telegramHtml: string, plain: string) {
+  if (!(await allowNotification())) {
+    await audit({ actor: "visitor", action, result: "skipped", detail: "notification cap reached" });
+    return;
+  }
   const sent = telegramConfigured ? (await sendToOwner(telegramHtml)) !== null : await pushover(plain);
   await audit({ actor: "visitor", action, result: sent ? "ok" : "error", detail: telegramConfigured ? "telegram" : "pushover" });
   if (!sent) console.warn(`[miki] ${action}: no notification channel succeeded`);
@@ -104,9 +109,10 @@ export function createToolRunner() {
       await notifyOwner(
         "notify.contact",
         mikiMessage("New contact", [
-          `<b>${esc(who || "Name not given")}</b> wants to get in touch.`,
-          `Email: ${esc(email)}`,
-          notes ? `Notes: ${esc(notes)}` : "",
+          `Someone wants to get in touch (details as the visitor typed them):`,
+          `Name: ${untrusted(who || "not given", 120)}`,
+          `Email: ${untrusted(email, 200)}`,
+          notes ? `Notes: ${untrusted(notes)}` : "",
         ].filter(Boolean)),
         `Recording interest from ${who || "Name not provided"} with email ${email} and notes ${notes || "not provided"}`,
       );
@@ -117,7 +123,7 @@ export function createToolRunner() {
     used[name]++;
     await notifyOwner(
       "notify.unknown_question",
-      mikiMessage("Unanswered question", [`A visitor asked something I couldn't answer:`, `<i>${esc(parsed.data.question)}</i>`]),
+      mikiMessage("Unanswered question", [`A visitor asked something I couldn't answer:`, untrusted(parsed.data.question)]),
       `Recording ${parsed.data.question} asked that I couldn't answer`,
     );
     return "OK";
