@@ -8,16 +8,20 @@ import { person } from "@/content/person";
  * through things he has actually built (Kordy is an AI agent, Insight Hub a
  * dashboard, Titleflow a platform).
  *
- * - The word sits on its own line, sized to the widest word, so nothing
- *   else moves (no layout shift).
+ * - Typed out letter by letter, held, then deleted; a camwood caret blinks
+ *   while it rests. The word has its own line, with an invisible copy of the
+ *   widest word holding its height, so nothing else moves (no layout shift).
  * - Screen readers and crawlers get the plain sentence; the animated copy is
  *   aria-hidden.
- * - WCAG 2.2.2: it pauses on hover or focus inside the hero, when the tab is
+ * - WCAG 2.2.2: it pauses on headline hover, while typing a question, when the tab is
  *   hidden, and with the "Pause motion" control (remembered). Reduced-motion
  *   visitors see the first word, still.
  */
-const words = ["product", "AI agent", "dashboard", "platform"] as const;
-const HOLD_MS = 2600;
+const words = ["product,", "AI agent,", "dashboard,", "platform,"] as const;
+const TYPE_MS = 65; // per letter typed
+const DELETE_MS = 35; // per letter deleted (faster: the eye doesn't read it)
+const HOLD_MS = 1300; // a finished word rests long enough to read
+const GAP_MS = 200; // empty beat before the next word
 const PAUSE_KEY = "motion:paused";
 
 const reducedMotion = {
@@ -32,6 +36,8 @@ const reducedMotion = {
 export function HeroHeadline() {
   const reduce = useSyncExternalStore(reducedMotion.subscribe, reducedMotion.get, () => true);
   const [index, setIndex] = useState(0);
+  const [typed, setTyped] = useState<string>(words[0]);
+  const [phase, setPhase] = useState<"hold" | "delete" | "type">("hold");
   const [userPaused, setUserPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -69,16 +75,35 @@ export function HeroHeadline() {
 
   const running = !reduce && !userPaused && !hovering;
 
+  // Whenever it pauses (hover, typing a question, Pause button), show the whole current word,
+  // never a half-typed one; it resumes from the rest. Derived during render, not in an effect.
+  if (!running && (typed !== words[index] || phase !== "hold")) {
+    setTyped(words[index]!);
+    setPhase("hold");
+  }
+
+  // One step of the typewriter per timeout; it simply stops while paused and continues from
+  // the same letter when resumed. Steps are skipped while the tab is hidden.
   useEffect(() => {
     if (!running) return;
-    let timer = 0;
-    const tick = () => {
-      if (document.visibilityState === "visible") setIndex((i) => (i + 1) % words.length);
-      timer = window.setTimeout(tick, HOLD_MS);
+    const word = words[index]!;
+    const step = () => {
+      if (document.visibilityState !== "visible") return;
+      if (phase === "hold") setPhase("delete");
+      else if (phase === "delete") {
+        if (typed.length > 0) setTyped(typed.slice(0, -1));
+        else {
+          setIndex((index + 1) % words.length);
+          setPhase("type");
+        }
+      } else if (typed.length < word.length) setTyped(word.slice(0, typed.length + 1));
+      else setPhase("hold");
     };
-    timer = window.setTimeout(tick, HOLD_MS);
+    const delay =
+      phase === "hold" ? HOLD_MS : phase === "delete" ? (typed.length ? DELETE_MS : GAP_MS) : typed.length < word.length ? TYPE_MS : 0;
+    const timer = window.setTimeout(step, delay);
     return () => window.clearTimeout(timer);
-  }, [running]);
+  }, [running, phase, typed, index]);
 
   function togglePause() {
     const next = !userPaused;
@@ -92,13 +117,13 @@ export function HeroHeadline() {
         <span className="sr-only">{person.headline}</span>
         <span aria-hidden="true">
           <span className="block">I build your</span>
-          {/* All words share one grid cell: the cell takes the widest word's size, so the layout never shifts. */}
-          <span className="headline-swap grid">
-            {words.map((w, i) => (
-              <span key={w} className="headline-word" data-state={i === index ? "in" : i === (index + words.length - 1) % words.length ? "out" : "wait"}>
-                {w},
-              </span>
-            ))}
+          {/* The invisible widest word holds the line's height, so typing never moves the layout. */}
+          <span className="grid">
+            <span className="invisible [grid-area:1/1]">dashboard,</span>
+            <span className="[grid-area:1/1]" data-typed={typed}>
+              {typed}
+              {!reduce ? <span className="type-caret" data-resting={phase === "hold" || !running ? "" : undefined} /> : null}
+            </span>
           </span>
           <span className="block">then I try to break into it.</span>
         </span>
