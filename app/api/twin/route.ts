@@ -88,7 +88,8 @@ export async function POST(req: Request) {
       try {
         for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
           const completion = await openai.chat.completions.create(
-            { model: MODEL, messages, tools, stream: true, ...extra },
+            // include_usage adds a final chunk with token counts (no choices), so cost can be tracked.
+            { model: MODEL, messages, tools, stream: true, stream_options: { include_usage: true }, ...extra },
             { signal: req.signal },
           );
           const calls: { id: string; name: string; args: string }[] = [];
