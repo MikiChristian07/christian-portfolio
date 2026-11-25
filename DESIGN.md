@@ -18,19 +18,20 @@ colors:
   live-green: "#7fb08a"
 typography:
   display:
-    fontFamily: "Gloock, Georgia, serif"
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
     fontSize: "5.25rem"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 0.98
+    letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Gloock, Georgia, serif"
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
     fontSize: "2.6875rem"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 1.05
   title:
-    fontFamily: "Gloock, Georgia, serif"
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
     fontSize: "1.5rem"
-    fontWeight: 400
+    fontWeight: 700
     lineHeight: 1.3
   body:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
@@ -93,13 +94,13 @@ components:
 
 A record written in Christian's own marks. Every piece of work, role and discipline carries an authored glyph drawn in the manner of uli, the line art of south-eastern Nigeria: single-weight strokes, curves that close on themselves, generous empty space. The twin decodes the record on request. The page is a dyed cloth at night, indigo ground and undyed cotton type, with one camwood line that runs once and settles.
 
-Density is editorial, not dashboard: wide gutters, hairline rules instead of boxes, one idea per row. Expression is spent in three places only: the Gloock display type, the glyphs, and the single drawn line in the hero. Everything else is quiet so those carry. The system refuses the dark 3D "Hi, I'm" developer hero and the cream editorial serif page; it also refuses glowing AI chrome.
+Density is editorial, not dashboard: wide gutters, hairline rules instead of boxes, one idea per row. Expression is spent in three places only: the Bricolage Grotesque display type, the glyphs, and the single drawn line in the hero. Everything else is quiet so those carry. The system refuses the dark 3D "Hi, I'm" developer hero and the cream editorial serif page; it also refuses glowing AI chrome.
 
-The palette follows London's hour: indigo night by default after dusk, the cotton ground by day, and the visitor can pin either from the command menu.
+The palette follows London's hour by default: indigo night after dusk, the cotton ground by day. A light/dark toggle in the header pins either; switching spreads the new palette out from the toggle in a circle, like dye through cloth.
 
 **Key Characteristics:**
 - Indigo-night ground, undyed-cotton type, camwood used only for what is live or selected.
-- Gloock for display and headings; Schibsted Grotesk for everything read.
+- Bricolage Grotesque (bold, optically sized) for display and headings; Schibsted Grotesk for everything read.
 - Hairline rules and full-width rows; no cards, no side stripes, no eyebrow labels.
 - One authored line drawing per page; all other motion answers the visitor.
 - Grain over everything at 6% (brief-pinned texture).
@@ -129,15 +130,15 @@ Dyed-cloth colours: an indigo night, the cotton it's printed on, and camwood red
 
 ## Typography
 
-**Display Font:** Gloock (with Georgia, serif)
+**Display Font:** Bricolage Grotesque (with system-ui, sans-serif)
 **Body Font:** Schibsted Grotesk (with system-ui, sans-serif)
 
-**Character:** Gloock's high contrast and ink-trap cuts read like letters carved from a block; Schibsted is a plain newspaper grotesk that stays out of the way. One voice speaks, the other explains.
+**Character:** Bricolage is a confident grotesk with quirks in its curves; set bold with optical sizing, large headlines tighten and gain character while small titles stay sturdy. Schibsted is a plain newspaper grotesk that stays out of the way. One voice speaks, the other explains.
 
 ### Hierarchy
-- **Display** (400, 5.25rem desktop / 3.56rem mobile, 0.98): the homepage headline and case-study titles only. Balanced, max about 13 characters per line.
-- **Headline** (400, 2.69–3.56rem, 1.05): section titles.
-- **Title** (400, 1.5–2rem, 1.3): row names (projects, roles, expertise areas) in Gloock.
+- **Display** (700, 5.25rem desktop / 3.56rem mobile, 0.98, -0.03em): the homepage headline and case-study titles only. Balanced, max about 13 characters per line.
+- **Headline** (700, 2.69–3.56rem, 1.05, -0.03em): section titles.
+- **Title** (700, 1.5–2rem, 1.3, -0.025em): row names (projects, roles, expertise areas).
 - **Body** (400, 1.0625rem, 1.6): all reading text, 38–62ch measures; lead paragraphs at 1.1875rem in Ash Muted.
 - **Label** (400–500, 0.8125–0.9375rem, 1.5): metadata, dates (tabular figures on the digits only), hints. Sentence case, never tracked capitals.
 
@@ -184,10 +185,10 @@ Plain and immediate.
 - **Twin composer:** a growing textarea (Enter sends, Shift+Enter breaks), an Ask/Stop button, and a one-line disclosure that it is an AI that says when it doesn't know.
 
 ### Navigation
-Sticky header with the mark and name on the left and section links in Schibsted 15px, muted until active. One camwood hairline slides under the active section and fades out above the first section. A bordered key hint opens the command menu. Phones get a Menu button that opens a full-width list set in Gloock.
+Sticky header with the mark and name on the left and section links in Schibsted 15px, muted until active. One camwood hairline slides under the active section and fades out above the first section. A bordered key hint opens the command menu. A half-dyed ring toggles light and dark; the dyed half faces the palette it will switch to. Phones get a Menu button that opens a full-width list in the display face.
 
 ### Glyph index (signature)
-Rows of authored marks: a 56px glyph in camwood, the name in Gloock, a one-line description in muted Schibsted, separated by hairlines. In the hero each row links to its case study, where the same glyph morphs into the page header (view transition). In Selected work each row opens in place to the problem, role and stack.
+Rows of authored marks: a 56px glyph in camwood, the name in the display face, a one-line description in muted Schibsted, separated by hairlines. In the hero each row links to its case study, where the same glyph morphs into the page header (view transition). In Selected work each row opens in place to the problem, role and stack.
 
 ### Uli line (signature)
 One continuous 1.6px line per page area: down the hero's gutter beside the headline, across the gap above the twin input, ending in a camwood knot. It draws once (1.1–1.6s, strong ease-in-out) when it enters view and then stays still; with reduced motion it is simply present. The experience timeline uses the same line in the strong rule colour with a knot per role.
@@ -201,7 +202,7 @@ Visitor questions sit right in a 10px tinted bubble; the twin's answers sit left
 - **Do** keep camwood for what is live or selected: the active section, the chosen option, the knot, links, focus (The One Dye Rule).
 - **Do** separate content with hairline rules (text colour at 14%) and full-width rows.
 - **Do** give every new project, role or area its own uli-style glyph on the 56-unit box at 1.6px, round caps.
-- **Do** answer interaction with motion under 300ms on the strong ease-out curve; keep panels and drawers under 500ms.
+- **Do** answer interaction with motion under 300ms on the strong ease-out curve; keep panels and drawers under 500ms. The theme reveal (650ms) is the one deliberate exception, because the visitor asked for a whole-page change.
 - **Do** check contrast in both palettes; muted text stays at or above 4.5:1.
 
 ### Don't:

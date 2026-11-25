@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-25T16:27:31+00:00",
+  "generatedAt": "2026-11-25T19:10:19+00:00",
   "title": "Design System: Christian Onovo",
   "extensions": {
     "colorMeta": {
@@ -329,17 +329,17 @@
     {
       "name": "Glyph Row",
       "kind": "custom",
-      "description": "Signature: an authored uli mark, a Gloock name and a muted line, between hairlines.",
+      "description": "Signature: an authored uli mark, a display-face name and a muted line, between hairlines.",
       "html": "<a class=\"ds-glyph-row\" href=\"#\"><svg viewBox=\"0 0 56 56\" width=\"56\" height=\"56\"><path d=\"M8 40C20 8 36 8 48 40\"/><path d=\"M18 30h20\"/><circle cx=\"28\" cy=\"44\" r=\"2.6\"/></svg><span><b>Kordy</b><small>An AI coordinator that finds cover when an event steward cancels.</small></span></a>",
-      "css": ".ds-glyph-row{display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:center;padding:16px 0;border-top:1px solid rgb(237 230 214/.14);border-bottom:1px solid rgb(237 230 214/.14);color:#ede6d6;text-decoration:none;transition:background 200ms}.ds-glyph-row:hover{background:rgb(74 42 58/.4)}.ds-glyph-row svg{color:#d0603f}.ds-glyph-row path{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.ds-glyph-row circle{fill:currentColor}.ds-glyph-row b{display:block;font:400 1.5rem Gloock,Georgia,serif}.ds-glyph-row small{color:#ada79a;font:400 .9375rem 'Schibsted Grotesk',system-ui,sans-serif}"
+      "css": ".ds-glyph-row{display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:center;padding:16px 0;border-top:1px solid rgb(237 230 214/.14);border-bottom:1px solid rgb(237 230 214/.14);color:#ede6d6;text-decoration:none;transition:background 200ms}.ds-glyph-row:hover{background:rgb(74 42 58/.4)}.ds-glyph-row svg{color:#d0603f}.ds-glyph-row path{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.ds-glyph-row circle{fill:currentColor}.ds-glyph-row b{display:block;font:700 1.5rem 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.025em}.ds-glyph-row small{color:#ada79a;font:400 .9375rem 'Schibsted Grotesk',system-ui,sans-serif}"
     }
   ],
   "narrative": {
     "northStar": "The Uli Cipher",
-    "overview": "A record written in Christian's own marks. Every piece of work, role and discipline carries an authored glyph drawn in the manner of uli, the line art of south-eastern Nigeria: single-weight strokes, curves that close on themselves, generous empty space. The twin decodes the record on request. The page is a dyed cloth at night, indigo ground and undyed cotton type, with one camwood line that runs once and settles.\n\nDensity is editorial, not dashboard: wide gutters, hairline rules instead of boxes, one idea per row. Expression is spent in three places only: the Gloock display type, the glyphs, and the single drawn line in the hero. Everything else is quiet so those carry. The system refuses the dark 3D \"Hi, I'm\" developer hero and the cream editorial serif page; it also refuses glowing AI chrome.\n\nThe palette follows London's hour: indigo night by default after dusk, the cotton ground by day, and the visitor can pin either from the command menu.",
+    "overview": "A record written in Christian's own marks. Every piece of work, role and discipline carries an authored glyph drawn in the manner of uli, the line art of south-eastern Nigeria: single-weight strokes, curves that close on themselves, generous empty space. The twin decodes the record on request. The page is a dyed cloth at night, indigo ground and undyed cotton type, with one camwood line that runs once and settles.\n\nDensity is editorial, not dashboard: wide gutters, hairline rules instead of boxes, one idea per row. Expression is spent in three places only: the Bricolage Grotesque display type, the glyphs, and the single drawn line in the hero. Everything else is quiet so those carry. The system refuses the dark 3D \"Hi, I'm\" developer hero and the cream editorial serif page; it also refuses glowing AI chrome.\n\nThe palette follows London's hour by default: indigo night after dusk, the cotton ground by day. A light/dark toggle in the header pins either; switching spreads the new palette out from the toggle in a circle, like dye through cloth.",
     "keyCharacteristics": [
       "Indigo-night ground, undyed-cotton type, camwood used only for what is live or selected.",
-      "Gloock for display and headings; Schibsted Grotesk for everything read.",
+      "Bricolage Grotesque (bold, optically sized) for display and headings; Schibsted Grotesk for everything read.",
       "Hairline rules and full-width rows; no cards, no side stripes, no eyebrow labels.",
       "One authored line drawing per page; all other motion answers the visitor.",
       "Grain over everything at 6% (brief-pinned texture)."
@@ -370,7 +370,7 @@
       "**Do** keep camwood for what is live or selected: the active section, the chosen option, the knot, links, focus (The One Dye Rule).",
       "**Do** separate content with hairline rules (text colour at 14%) and full-width rows.",
       "**Do** give every new project, role or area its own uli-style glyph on the 56-unit box at 1.6px, round caps.",
-      "**Do** answer interaction with motion under 300ms on the strong ease-out curve; keep panels and drawers under 500ms.",
+      "**Do** answer interaction with motion under 300ms on the strong ease-out curve; keep panels and drawers under 500ms. The theme reveal (650ms) is the one deliberate exception, because the visitor asked for a whole-page change.",
       "**Do** check contrast in both palettes; muted text stays at or above 4.5:1."
     ],
     "donts": [

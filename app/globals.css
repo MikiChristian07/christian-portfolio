@@ -63,7 +63,7 @@
   --color-ok: var(--ok);
   --color-warn: var(--warn);
 
-  --font-display: var(--font-gloock), "Georgia", serif;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
   --font-sans: var(--font-schibsted), system-ui, sans-serif;
 
   /* Perfect-fourth scale from a 17px body. */
@@ -120,6 +120,18 @@
   p {
     text-wrap: pretty;
   }
+}
+
+/* Display voice: Bricolage Grotesque, bold with optical sizing; tracking tightens as size grows. */
+.font-display {
+  font-weight: 700;
+  font-optical-sizing: auto;
+  letter-spacing: -0.025em;
+}
+h1.font-display,
+.text-4xl.font-display,
+.text-5xl.font-display {
+  letter-spacing: -0.03em;
 }
 
 /* Grain: a fixed, non-interactive layer. Cheap (one static SVG). */
@@ -265,4 +277,18 @@ textarea::placeholder {
 .disclose > * {
   overflow: hidden;
   min-height: 0;
+}
+
+/* Theme switch: the new palette is revealed by a clip-path circle (see ThemeToggle);
+   turn off the default root crossfade only while that transition runs. */
+html[data-theme-switch]::view-transition-old(root),
+html[data-theme-switch]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html[data-theme-switch]::view-transition-old(root) {
+  z-index: 1;
+}
+html[data-theme-switch]::view-transition-new(root) {
+  z-index: 2;
 }

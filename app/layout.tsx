@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Gloock, Schibsted_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Schibsted_Grotesk } from "next/font/google";
 import { person } from "@/content/person";
 import { PaletteScript } from "@/components/palette-script";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/home/sections";
 import "./globals.css";
 
-const gloock = Gloock({ weight: "400", subsets: ["latin"], variable: "--font-gloock", display: "swap" });
+// Variable with optical sizing: large headlines get tighter detailing automatically.
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], axes: ["opsz"], variable: "--font-bricolage", display: "swap" });
 const schibsted = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-schibsted", display: "swap" });
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" data-palette="night" suppressHydrationWarning className={`${gloock.variable} ${schibsted.variable}`}>
+    <html lang="en-GB" data-palette="night" suppressHydrationWarning className={`${bricolage.variable} ${schibsted.variable}`}>
       <head>
         <PaletteScript />
       </head>

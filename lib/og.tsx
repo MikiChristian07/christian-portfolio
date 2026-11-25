@@ -3,10 +3,10 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { glyphs, type GlyphId } from "@/content/glyphs";
 
-/** Shared social-share card: indigo ground, cotton Gloock title, the item's mark in camwood. */
+/** Shared social-share card: indigo ground, cotton Bricolage title, the item's mark in camwood. */
 export const ogSize = { width: 1200, height: 630 };
 
-const gloock = readFile(join(process.cwd(), "assets/fonts/Gloock-Regular.ttf"));
+const bricolage = readFile(join(process.cwd(), "assets/fonts/BricolageGrotesque-Bold.woff"));
 const schibsted = readFile(join(process.cwd(), "assets/fonts/SchibstedGrotesk-Regular.woff"));
 
 export async function renderOg({ title, subtitle, glyph }: { title: string; subtitle: string; glyph: GlyphId }) {
@@ -35,7 +35,7 @@ export async function renderOg({ title, subtitle, glyph }: { title: string; subt
         </div>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 48 }}>
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 820 }}>
-            <div style={{ fontFamily: "Gloock", fontSize: title.length > 40 ? 76 : 96, lineHeight: 1.02, letterSpacing: "-0.02em" }}>
+            <div style={{ fontFamily: "Bricolage", fontWeight: 700, fontSize: title.length > 40 ? 74 : 96, lineHeight: 1.0, letterSpacing: "-0.035em" }}>
               {title}
             </div>
             <div style={{ marginTop: 28, fontSize: 32, lineHeight: 1.35, color: "#ada79a" }}>{subtitle}</div>
@@ -53,7 +53,7 @@ export async function renderOg({ title, subtitle, glyph }: { title: string; subt
       ...ogSize,
       fonts: [
         { name: "Schibsted", data: await schibsted, style: "normal", weight: 400 },
-        { name: "Gloock", data: await gloock, style: "normal", weight: 400 },
+        { name: "Bricolage", data: await bricolage, style: "normal", weight: 700 },
       ],
     },
   );

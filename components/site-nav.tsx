@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { person } from "@/content/person";
 import { loadCommandPalette, useShortcutLabel } from "@/components/palette-hooks";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const sections = [
   { id: "work", label: "Work" },
@@ -114,7 +115,8 @@ export function SiteNav({ onOpenPalette }: { onOpenPalette?: () => void }) {
           </li>
         </ul>
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-2">
+          <ThemeToggle />
           {onOpenPalette ? (
             <button
               type="button"
