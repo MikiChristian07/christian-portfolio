@@ -102,7 +102,7 @@ The palette follows London's hour by default: indigo night after dusk, the cotto
 - Indigo-night ground, undyed-cotton type, camwood used only for what is live or selected.
 - Bricolage Grotesque (bold, optically sized) for display and headings; Schibsted Grotesk for everything read.
 - Hairline rules and full-width rows; no cards, no side stripes, no eyebrow labels.
-- One authored line drawing per page; all other motion answers the visitor.
+- One authored line drawing and one living word per page; all other motion answers the visitor.
 - Grain over everything at 6% (brief-pinned texture).
 
 ## Colors
@@ -193,6 +193,9 @@ Rows of authored marks: a 56px glyph in camwood, the name in the display face, a
 ### Uli line (signature)
 One continuous 1.6px line per page area: down the hero's gutter beside the headline, across the gap above the twin input, ending in a camwood knot. It draws once (1.1–1.6s, strong ease-in-out) when it enters view and then stays still; with reduced motion it is simply present. The experience timeline uses the same line in the strong rule colour with a knot per role.
 
+### Living word (signature)
+The hero headline's object word cycles through things Christian has built (product, AI agent, dashboard, platform) every 2.6s: the outgoing word lifts and blurs away, the next rises into a clipped cell sized to the widest word, so nothing else moves. It is the page's one continuous motion. It pauses while the headline is hovered, while the question box has focus, when the tab is hidden, and with a visible Pause motion control (remembered). Screen readers and crawlers get the plain sentence; reduced motion shows the first word, still.
+
 ### Conversation
 Visitor questions sit right in a 10px tinted bubble; the twin's answers sit left beside its two-ring glyph, in muted body text with cotton emphasis and camwood links. Thinking is the uli wave tracing itself. Errors sit in a bordered box with a camwood dot, a plain message and Try again.
 
@@ -211,4 +214,5 @@ Visitor questions sit right in a 10px tinted bubble; the twin's answers sit left
 - **Don't** add a bar down one side of a box, or a shadow under a bordered surface.
 - **Don't** use Uli Indigo for text or edges.
 - **Don't** animate on scroll for decoration, add a second drawn line to a page that has one, or animate anything opened from the keyboard (the command menu opens instantly).
+- **Don't** add a second continuous animation. The living word is the only motion that runs on its own, and any motion that runs longer than 5 seconds needs a visible pause (WCAG 2.2.2).
 - **Don't** use nsibidi or any society's signs as ornament; glyphs are authored, and Christian approves each one.

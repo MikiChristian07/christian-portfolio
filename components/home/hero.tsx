@@ -5,6 +5,7 @@ import { caseStudies } from "@/content/projects";
 import { Glyph } from "@/components/glyph";
 import { UliLine } from "@/components/uli-line";
 import { HeroAsk } from "@/components/twin/hero-ask";
+import { HeroHeadline } from "@/components/home/hero-headline";
 
 export function Hero() {
   return (
@@ -25,9 +26,7 @@ export function Hero() {
               d="M14 0 C 4 180, 22 360, 12 540 S 6 860, 14 1000"
               duration={1.1}
             />
-            <h1 id="hero-title" className="font-display text-4xl md:text-5xl max-w-[13ch]">
-              {person.headline}
-            </h1>
+            <HeroHeadline />
             <p className="mt-8 max-w-[38ch] text-lg text-ink-muted">{person.summary}</p>
           </div>
           <div className="relative max-w-2xl">

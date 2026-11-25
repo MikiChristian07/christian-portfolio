@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-25T19:10:19+00:00",
+  "generatedAt": "2026-11-25T19:22:56+00:00",
   "title": "Design System: Christian Onovo",
   "extensions": {
     "colorMeta": {
@@ -341,7 +341,7 @@
       "Indigo-night ground, undyed-cotton type, camwood used only for what is live or selected.",
       "Bricolage Grotesque (bold, optically sized) for display and headings; Schibsted Grotesk for everything read.",
       "Hairline rules and full-width rows; no cards, no side stripes, no eyebrow labels.",
-      "One authored line drawing per page; all other motion answers the visitor.",
+      "One authored line drawing and one living word per page; all other motion answers the visitor.",
       "Grain over everything at 6% (brief-pinned texture)."
     ],
     "rules": [
@@ -379,6 +379,7 @@
       "**Don't** add a bar down one side of a box, or a shadow under a bordered surface.",
       "**Don't** use Uli Indigo for text or edges.",
       "**Don't** animate on scroll for decoration, add a second drawn line to a page that has one, or animate anything opened from the keyboard (the command menu opens instantly).",
+      "**Don't** add a second continuous animation. The living word is the only motion that runs on its own, and any motion that runs longer than 5 seconds needs a visible pause (WCAG 2.2.2).",
       "**Don't** use nsibidi or any society's signs as ornament; glyphs are authored, and Christian approves each one."
     ]
   }

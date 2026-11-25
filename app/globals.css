@@ -292,3 +292,39 @@ html[data-theme-switch]::view-transition-old(root) {
 html[data-theme-switch]::view-transition-new(root) {
   z-index: 2;
 }
+
+/* Hero headline's living word. All words share one grid cell (sized to the widest),
+   so swapping never moves the layout. The cell clips vertical travel but leaves room
+   for descenders. Transform, opacity and a little blur only. */
+.headline-swap {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  clip-path: inset(-0.05em -0.5em 0 -0.05em);
+}
+.headline-word {
+  grid-area: 1 / 1;
+  transition:
+    transform 700ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 450ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 450ms ease;
+}
+.headline-word[data-state="in"] {
+  transform: translateY(0);
+  opacity: 1;
+}
+.headline-word[data-state="out"] {
+  transform: translateY(-85%);
+  opacity: 0;
+  filter: blur(4px);
+}
+.headline-word[data-state="wait"] {
+  transform: translateY(85%);
+  opacity: 0;
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .headline-word[data-state="out"],
+  .headline-word[data-state="wait"] {
+    visibility: hidden;
+  }
+}
