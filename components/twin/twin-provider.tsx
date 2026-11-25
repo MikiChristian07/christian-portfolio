@@ -38,6 +38,20 @@ type TwinActions = {
 const TwinContext = createContext<(TwinState & TwinActions) | null>(null);
 
 const STORAGE_KEY = "twin:conversation:v1";
+const ID_KEY = "twin:conversation-id:v1";
+
+/** Random per-tab id that groups one conversation in analytics. Never tied to a person. */
+function conversationIdFor(reset = false) {
+  try {
+    const existing = reset ? null : sessionStorage.getItem(ID_KEY);
+    if (existing) return existing;
+    const id = crypto.randomUUID();
+    sessionStorage.setItem(ID_KEY, id);
+    return id;
+  } catch {
+    return undefined;
+  }
+}
 
 function load(): TwinMessage[] {
   try {
@@ -112,7 +126,7 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch("/api/twin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: trimForRequest(history), context: currentContextId() }),
+        body: JSON.stringify({ conversationId: conversationIdFor(), messages: trimForRequest(history), context: currentContextId() }),
         signal: controller.signal,
       });
       if (!res.body) throw new Error("no body");
@@ -184,6 +198,7 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
 
   const reset = useCallback(() => {
     track("twin_reset", {});
+    conversationIdFor(true);
     abortRef.current?.abort();
     setMessages([]);
     setError(null);

@@ -1,10 +1,12 @@
-import OpenAI from "openai";
+import { randomUUID } from "node:crypto";
+import { after } from "next/server";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { twinRequest, type TwinEvent } from "@/lib/twin/schema";
 import { systemPrompt } from "@/lib/twin/prompt";
 import { createToolRunner, tools } from "@/lib/twin/tools";
 import { checkLimits } from "@/lib/twin/rate-limit";
 import { describeContext } from "@/lib/twin/context";
+import { createTwinClients, monitoringParams } from "@/lib/twin/observability";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -69,7 +71,10 @@ export async function POST(req: Request) {
     return json(503, { t: "error", code: "unavailable", message: "The twin isn't connected right now. Everything it knows is on this page." });
   }
 
-  const openai = new OpenAI({ timeout: 45_000, maxRetries: 1 });
+  const { openai, posthog, observed } = createTwinClients(process.env.OPENAI_API_KEY);
+  // Flush analytics after the response has finished streaming, never in its way.
+  if (posthog) after(() => posthog.shutdown().catch(() => {}));
+  const extra = observed ? monitoringParams(randomUUID(), parsed.data.conversationId, parsed.data.context) : {};
   const runTool = createToolRunner();
   const messages: ChatCompletionMessageParam[] = [
     { role: "system", content: systemPrompt(describeContext(parsed.data.context)) },
@@ -83,7 +88,7 @@ export async function POST(req: Request) {
       try {
         for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
           const completion = await openai.chat.completions.create(
-            { model: MODEL, messages, tools, stream: true },
+            { model: MODEL, messages, tools, stream: true, ...extra },
             { signal: req.signal },
           );
           const calls: { id: string; name: string; args: string }[] = [];

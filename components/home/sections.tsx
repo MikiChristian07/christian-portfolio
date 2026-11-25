@@ -7,6 +7,7 @@ import { Glyph } from "@/components/glyph";
 import { UliLine } from "@/components/uli-line";
 import { WorkRow } from "@/components/home/work-row";
 import { ContactForm } from "@/components/home/contact-form";
+import { TrackedLink } from "@/components/tracked-link";
 
 function SectionHead({ id, title, intro }: { id: string; title: string; intro?: string }) {
   return (
@@ -41,7 +42,7 @@ export function WorkSection() {
         <ul className="mt-10 grid gap-x-10 gap-y-14 md:grid-cols-2">
           {shippedSites.map((s) => (
             <li key={s.name}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="group block">
+              <TrackedLink href={s.href} kind="shipped_site" rel="noopener noreferrer" className="group block">
                 <span className="block overflow-hidden border border-rule">
                   <Image
                     src={s.image}
@@ -59,7 +60,7 @@ export function WorkSection() {
                 <span className="text-sm text-ink-muted">
                   {s.kind} <span className="sr-only">(opens in a new tab)</span>
                 </span>
-              </a>
+              </TrackedLink>
             </li>
           ))}
         </ul>
@@ -222,20 +223,20 @@ export function ContactSection() {
             <div>
               <dt className="text-sm text-ink-muted">Email</dt>
               <dd>
-                <a href={`mailto:${person.contact.email}`} className="link">
+                <TrackedLink href={`mailto:${person.contact.email}`} kind="email" className="link">
                   {person.contact.email}
-                </a>
+                </TrackedLink>
               </dd>
             </div>
             <div>
               <dt className="text-sm text-ink-muted">Elsewhere</dt>
               <dd className="flex gap-6">
-                <a href={person.links.linkedin} className="link" rel="me noopener" target="_blank">
+                <TrackedLink href={person.links.linkedin} kind="linkedin" className="link" rel="me noopener">
                   LinkedIn
-                </a>
-                <a href={person.links.github} className="link" rel="me noopener" target="_blank">
+                </TrackedLink>
+                <TrackedLink href={person.links.github} kind="github" className="link" rel="me noopener">
                   GitHub
-                </a>
+                </TrackedLink>
               </dd>
             </div>
           </dl>

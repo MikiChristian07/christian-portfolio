@@ -13,6 +13,8 @@ const message = z.discriminatedUnion("role", [
 ]);
 
 export const twinRequest = z.object({
+  /** Random per-tab id that groups one conversation's answers in analytics. Not linked to a person. */
+  conversationId: z.uuid().optional(),
   messages: z
     .array(message)
     .min(1)
