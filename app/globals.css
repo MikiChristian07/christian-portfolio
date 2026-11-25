@@ -302,7 +302,6 @@ html[data-theme-switch]::view-transition-new(root) {
   margin-left: 0.05em;
   vertical-align: -0.06em;
   background: var(--accent);
-  border-radius: 1px;
 }
 .type-caret[data-resting] {
   animation: caret-blink 1s steps(1) infinite;
