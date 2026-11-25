@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Direction B: The Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--desk:#17191C;--sheet:#E8E6E0;--ink:#16181B;--rule:#C9C6BE;--marker:#E6D84A;--muted:#6E6B64;--ease-out:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;background:var(--desk);color:var(--sheet);font:400 16px/1.5 "Archivo",system-ui,sans-serif}
+header{position:absolute;left:64px;top:56px;width:360px}
+header h1{font:800 58px/0.95 "Archivo";font-stretch:70%;letter-spacing:-.01em;text-transform:none}
+header p{margin-top:22px;color:#B8B5AE;font-size:17px}
+header nav{margin-top:40px;display:grid;gap:10px;font-size:16px}
+header nav a{color:var(--sheet);text-decoration:none;display:flex;justify-content:space-between;border-top:1px solid #ffffff1c;padding-top:10px}
+header nav a span{color:#8A877F}
+.sheet{position:absolute;left:470px;top:40px;width:640px;height:820px;background:var(--sheet);color:var(--ink);box-shadow:0 30px 80px -30px #000;padding:46px 56px 40px 92px;font:400 17px/30px "Courier Prime",monospace}
+.sheet .cap{font:700 14px/1.4 "Archivo";letter-spacing:.02em;display:flex;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:14px}
+.ln{position:relative}
+.ln:before{content:attr(data-n);position:absolute;left:-52px;width:30px;text-align:right;color:var(--muted)}
+.q{font-weight:700}
+mark{background:var(--marker);padding:0 2px}
+.live{display:flex;gap:10px;align-items:center}
+.live input{flex:1;background:none;border:0;border-bottom:1px solid var(--ink);font:inherit;color:var(--ink);outline:none;padding:2px 0}
+.live input::placeholder{color:#16181B88}
+.caret{width:10px;height:20px;background:var(--ink);animation:b 1s steps(1) infinite}
+@keyframes b{50%{opacity:0}}
+.margin{position:absolute;left:1140px;top:120px;width:240px;font-size:14px;color:#B8B5AE}
+.margin .ex{border-left:2px solid var(--marker);padding:4px 0 4px 14px;margin-bottom:22px}
+.margin b{display:block;color:var(--sheet);font:700 18px "Archivo";font-stretch:80%}
+.cta{position:absolute;left:64px;bottom:56px;display:flex;gap:12px}
+.cta a{font:600 15px "Archivo";padding:12px 16px;border:1px solid #ffffff33;color:var(--sheet);text-decoration:none;transition:transform 160ms var(--ease-out)}
+.cta a:first-child{background:var(--marker);color:var(--ink);border-color:var(--marker)}
+</style></head><body>
+<header>
+  <h1>Christian Onovo, on the record.</h1>
+  <p>Engineer, CTO at TalaTech, ethical hacker. Ask anything about my work. My twin answers from my real record, and the transcript stays open as you browse.</p>
+  <nav><a>Exhibits: selected work <span>4</span></a><a>Experience <span>2022–now</span></a><a>Research <span>MSc</span></a><a>Contact <span>⌘K</span></a></nav>
+</header>
+<div class="sheet">
+  <div class="cap"><span>TRANSCRIPT OF CONVERSATION</span><span>Session 0412 · London</span></div>
+  <div class="ln q" data-n="1">Q. What do you do?</div>
+  <div class="ln" data-n="2">A. I'm the <mark>CTO at TalaTech</mark>. I build products for</div>
+  <div class="ln" data-n="3">   service businesses and run the technical side,</div>
+  <div class="ln" data-n="4">   from architecture to deployment.</div>
+  <div class="ln q" data-n="5">Q. Have you built anything with AI?</div>
+  <div class="ln" data-n="6">A. Kordy. It's an AI coordinator for event staffing</div>
+  <div class="ln" data-n="7">   agencies: it finds eligible cover when a worker</div>
+  <div class="ln" data-n="8">   cancels and drafts the invitation for approval.</div>
+  <div class="ln" data-n="9">   See <mark>Exhibit A</mark>.</div>
+  <div class="ln q" data-n="10">Q. And security?</div>
+  <div class="ln" data-n="11">A. I'm studying for an MSc in Cybersecurity at</div>
+  <div class="ln" data-n="12">   Northumbria, London. I test what I build.</div>
+  <div class="ln" data-n="13"> </div>
+  <div class="ln q live" data-n="14">Q. <input placeholder="Your question goes on the record"><span class="caret"></span></div>
+  <div class="ln" data-n="15"> </div>
+  <div class="ln" data-n="16" style="color:#6E6B64">   Try: "Does he have leadership experience?"</div>
+  <div class="ln" data-n="17" style="color:#6E6B64">        "Where can I download his CV?"</div>
+</div>
+<aside class="margin">
+  <div class="ex"><b>Exhibit A · Kordy</b>Next.js 16, Postgres, OpenAI Responses API. Solo build.</div>
+  <div class="ex"><b>Exhibit B · Insight Hub</b>TalaTech analytics. 57 of 114 commits.</div>
+  <div class="ex"><b>Exhibit C · Titleflow</b>Team build. Role to confirm.</div>
+</aside>
+<div class="cta"><a>Read the exhibits</a><a>Download CV</a><a>Contact</a></div>
+</body></html>

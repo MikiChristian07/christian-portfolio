@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Direction A: Uli Cipher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0E1424;--indigo:#2B3A6B;--cotton:#EDE6D6;--cotton-dim:#B9B3A6;--camwood:#B2472C;--overprint:#4A2A3A;--ease-out:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;background:var(--night);color:var(--cotton);font:400 17px/1.55 "Schibsted Grotesk",system-ui,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+nav{position:absolute;top:36px;left:72px;right:72px;display:flex;align-items:center;gap:40px;font-size:15px}
+nav .mark{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-.01em}
+nav a{color:var(--cotton-dim);text-decoration:none}
+nav a[aria-current]{color:var(--cotton)}
+nav .k{margin-left:auto;border:1px solid #ffffff22;border-radius:6px;padding:6px 10px;color:var(--cotton-dim)}
+.line{position:absolute;inset:0;pointer-events:none}
+.line path{fill:none;stroke:var(--cotton);stroke-width:1.6;stroke-linecap:round;opacity:.9}
+.line .red{stroke:var(--camwood);stroke-width:2.2}
+h1{position:absolute;left:72px;top:170px;width:780px;font:400 84px/0.98 "Gloock",serif;letter-spacing:-.02em}
+.lede{position:absolute;left:72px;top:500px;width:560px;color:var(--cotton-dim);font-size:19px}
+.ask{position:absolute;left:72px;top:610px;width:680px}
+.ask form{display:flex;align-items:center;gap:12px;background:#ffffff0a;border:1px solid #ffffff26;border-radius:10px;padding:8px 8px 8px 20px;backdrop-filter:blur(8px)}
+.ask input{flex:1;background:none;border:0;color:var(--cotton);font:inherit;font-size:18px;outline:none}
+.ask input::placeholder{color:#EDE6D680}
+.ask button{background:var(--cotton);color:var(--night);border:0;border-radius:7px;padding:12px 18px;font:700 15px "Schibsted Grotesk";transition:transform 160ms var(--ease-out)}
+.ask button:active{transform:scale(.97)}
+.chips{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.chips span{font-size:14px;color:var(--cotton-dim);border-bottom:1px solid #ffffff30;padding:2px 0;margin-right:14px}
+.status{margin-top:16px;font-size:13px;color:#EDE6D699}
+.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#7FB08A;margin-right:8px}
+.actions{position:absolute;left:72px;bottom:60px;display:flex;gap:28px;font-weight:500}
+.actions a{color:var(--cotton);text-decoration:none;border-bottom:1px solid var(--camwood);padding-bottom:3px}
+.index{position:absolute;right:72px;top:170px;width:440px}
+.index h2{font:500 15px "Schibsted Grotesk";color:var(--cotton-dim);margin-bottom:18px}
+.row{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:center;padding:16px 0;border-top:1px solid #ffffff1a}
+.row:last-child{border-bottom:1px solid #ffffff1a}
+.glyph{width:56px;height:56px}
+.glyph path,.glyph circle{fill:none;stroke:var(--cotton);stroke-width:1.6;stroke-linecap:round}
+.row b{display:block;font:400 26px/1.1 "Gloock",serif}
+.row small{color:var(--cotton-dim);font-size:14px}
+.row.on .glyph path{stroke:var(--camwood)}
+.row.on{background:linear-gradient(90deg,#2B3A6B55,transparent)}
+.ldn{position:absolute;right:72px;bottom:60px;font-size:13px;color:#EDE6D699}
+</style></head><body>
+<svg class="line" viewBox="0 0 1440 900" aria-hidden="true">
+  <!-- one continuous uli line: enters from the nav mark, loops under the headline and ends at the twin input -->
+  <path d="M96 64 C 300 120, 40 140, 60 150 S 820 120, 860 300 S 700 470, 640 470 S 620 560, 760 600"/>
+  <path class="red" d="M640 470 c 16 -14 36 -14 44 2 c 8 16 -10 30 -26 24"/>
+</svg>
+<nav>
+  <span class="mark"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11" fill="none" stroke="#EDE6D6" stroke-width="1.6"/><path d="M6 13h14M13 6v14" stroke="#B2472C" stroke-width="1.6"/></svg>Christian Onovo</span>
+  <a aria-current="page">Index</a><a>Work</a><a>Research</a><a>About</a><a>Ask</a>
+  <span class="k">⌘K</span>
+</nav>
+<h1>I build your product, then I try to break into it.</h1>
+<p class="lede">CTO at TalaTech. Software engineer and ethical hacker, now studying for an MSc in Cybersecurity in London.</p>
+<div class="ask">
+  <form><input placeholder="Ask my twin how I'd build your product"><button type="button">Ask</button></form>
+  <div class="chips"><span>What does a CTO at TalaTech do?</span><span>How does Kordy work?</span><span>Can I see your CV?</span></div>
+  <p class="status"><i></i>Twin awake. Answers come from my real record and say when they don't know.</p>
+</div>
+<div class="index">
+  <h2>Work, each with its own mark</h2>
+  <div class="row on"><svg class="glyph" viewBox="0 0 56 56"><path d="M8 40 C 20 8, 36 8, 48 40"/><path d="M18 30h20"/><circle cx="28" cy="44" r="3"/></svg><div><b>Kordy</b><small>AI coordinator for staffing agencies</small></div></div>
+  <div class="row"><svg class="glyph" viewBox="0 0 56 56"><path d="M10 28h36M28 10v36"/><path d="M16 16 C 24 24, 32 24, 40 16"/></svg><div><b>Insight Hub</b><small>Analytics for TalaTech clients</small></div></div>
+  <div class="row"><svg class="glyph" viewBox="0 0 56 56"><path d="M10 14h36M10 28h24M10 42h36"/><path d="M40 22 l6 6 -6 6"/></svg><div><b>Titleflow</b><small>Title workflow platform, team build</small></div></div>
+  <div class="row"><svg class="glyph" viewBox="0 0 56 56"><circle cx="28" cy="28" r="16"/><path d="M28 12 v32 M14 36 C 22 28, 34 28, 42 36"/></svg><div><b>Security research</b><small>MSc work, post-quantum and chain security</small></div></div>
+</div>
+<div class="actions"><a>See the work</a><a>Download CV</a><a>Start a project</a></div>
+<p class="ldn">London, 21:40. Night palette until 07:00.</p>
+</body></html>

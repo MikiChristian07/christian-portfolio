@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Direction C: Select Rail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0B0B0A;--flag:#F0561D;--punch:#F6F4EF;--spool:#2A2A28;--ease-out:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;background:var(--black);color:var(--punch);font:400 16px/1.5 "Hanken Grotesk",system-ui,sans-serif}
+.rail{position:absolute;left:0;right:0;top:0;height:330px;background:var(--flag);color:var(--black)}
+.rail:before,.rail:after{content:"";position:absolute;left:0;right:0;height:14px;background:radial-gradient(circle at 12px 7px,var(--black) 5px,transparent 6px) 0 0/34px 14px}
+.rail:before{top:14px}.rail:after{bottom:14px}
+.top{position:absolute;left:56px;right:56px;top:44px;display:flex;align-items:center;gap:32px;font:800 18px "Big Shoulders Display";letter-spacing:.06em;text-transform:uppercase}
+.top span:last-child{margin-left:auto;font-weight:500}
+.frames{position:absolute;left:56px;right:56px;top:96px;display:flex;gap:10px}
+.fr{flex:0 0 156px;height:170px;border:2px solid var(--black);padding:12px;display:flex;flex-direction:column;justify-content:space-between;font:800 22px/1 "Big Shoulders Display";text-transform:uppercase;position:relative}
+.fr small{font:600 13px "Hanken Grotesk";text-transform:none}
+.fr.done:after{content:"";position:absolute;inset:18px;background:linear-gradient(45deg,transparent 48%,#F6F4EFcc 49% 51%,transparent 52%),linear-gradient(-45deg,transparent 48%,#F6F4EFcc 49% 51%,transparent 52%);opacity:.55}
+.fr.sel{background:var(--black);color:var(--flag);flex-basis:240px}
+.flag{position:absolute;top:-8px;right:14px;width:26px;height:44px;background:var(--punch);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.ticks{position:absolute;left:56px;right:56px;top:284px;display:flex;justify-content:space-between;font:500 14px "Big Shoulders Display"}
+.window{position:absolute;left:56px;top:380px;width:760px;background:var(--punch);color:var(--black);padding:36px 40px}
+.window h1{font:800 76px/.92 "Big Shoulders Display";text-transform:uppercase}
+.window p{margin-top:16px;font-size:18px;max-width:560px}
+.ask{margin-top:24px;display:flex;border:2px solid var(--black)}
+.ask input{flex:1;border:0;padding:14px 16px;font:inherit;font-size:17px;background:none;outline:none}
+.ask button{border:0;background:var(--black);color:var(--flag);font:800 18px "Big Shoulders Display";letter-spacing:.06em;text-transform:uppercase;padding:0 22px}
+.bin{position:absolute;left:880px;right:56px;top:380px}
+.bin h2{font:800 20px "Big Shoulders Display";letter-spacing:.06em;text-transform:uppercase;color:var(--flag);margin-bottom:14px}
+.pin{display:flex;justify-content:space-between;border-top:1px dashed #F6F4EF40;padding:12px 0;color:#CFCBC2}
+.pin:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--flag);margin:7px 12px 0 0;flex:none}
+.pin span:first-of-type{flex:1}
+.acts{position:absolute;left:880px;bottom:56px;display:flex;gap:22px;font:800 20px "Big Shoulders Display";letter-spacing:.06em;text-transform:uppercase}
+.acts a{color:var(--punch);border-bottom:3px solid var(--flag)}
+</style></head><body>
+<section class="rail">
+  <div class="top"><span>Christian Onovo</span><span>Work</span><span>Research</span><span>Ask</span><span>⌘K · Resume where you stopped</span></div>
+  <div class="frames">
+    <div class="fr done">Genesys<small>Software engineer · 2022</small></div>
+    <div class="fr done">Foretrust<small>Taught web dev · 2023</small></div>
+    <div class="fr">FMG<small>Web developer · 2024</small></div>
+    <div class="fr">Raven &amp; Macaw<small>Web developer · 2025</small></div>
+    <div class="fr">Insight Hub<small>TalaTech analytics · 2025</small></div>
+    <div class="fr sel"><span class="flag"></span>Kordy<small style="color:#F6F4EF">AI staffing coordinator · 2026</small></div>
+  </div>
+  <div class="ticks"><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span><span>Now: CTO, TalaTech</span></div>
+</section>
+<section class="window">
+  <h1>Builder. CTO. Ethical hacker.</h1>
+  <p>Every role and build on one rail, in order. Scrub it, open a frame, or ask my twin about the one you stopped on.</p>
+  <div class="ask"><input placeholder="Ask about Kordy, or anything on the rail"><button type="button">Ask</button></div>
+</section>
+<section class="bin">
+  <h2>On the pins</h2>
+  <div class="pin"><span>Talatech.io</span><span>WordPress</span></div>
+  <div class="pin"><span>Montana Speedy Title</span><span>WordPress</span></div>
+  <div class="pin"><span>EyeCare Merry Hill</span><span>WordPress</span></div>
+  <div class="pin"><span>Web3 practice contracts</span><span>Solidity</span></div>
+</section>
+<div class="acts"><a>See the work</a><a>CV</a><a>Contact</a></div>
+</body></html>

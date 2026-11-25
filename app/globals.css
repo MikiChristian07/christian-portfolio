@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+/*
+ * Uli Cipher tokens.
+ * Primitive colours live here once; components only use the semantic names.
+ * Night is the default; [data-palette="day"] swaps to the cotton ground.
+ * Contrast (checked): text 14.8:1, muted 7.7:1 (night) / 5.9:1 (day),
+ * accent 4.7:1 (night) / 5.4:1 (day). Indigo is a field colour only, never text.
+ */
+:root {
+  --c-night: #0e1424;
+  --c-indigo: #2b3a6b;
+  --c-cotton: #ede6d6;
+  --c-camwood: #b2472c;
+  --c-overprint: #4a2a3a;
+
+  --ground: var(--c-night);
+  --ground-raised: #131a2d;
+  --ink: var(--c-cotton);
+  --ink-muted: #ada79a;
+  --field: var(--c-indigo);
+  --accent: #d0603f;
+  --selected: var(--c-overprint);
+  --rule: rgb(237 230 214 / 0.14);
+  --rule-strong: rgb(237 230 214 / 0.3);
+  --line: var(--c-cotton);
+  --ok: #7fb08a;
+  --warn: #e0b25a;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  color-scheme: dark;
+}
+
+[data-palette="day"] {
+  --ground: var(--c-cotton);
+  --ground-raised: #e4dcca;
+  --ink: var(--c-night);
+  --ink-muted: #545663;
+  --field: #d9d0bc;
+  --accent: #a13a22;
+  --selected: #e2cfc4;
+  --rule: rgb(14 20 36 / 0.14);
+  --rule-strong: rgb(14 20 36 / 0.32);
+  --line: var(--c-night);
+  --ok: #2f6b3c;
+  --warn: #8a5a00;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-ground-raised: var(--ground-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-field: var(--field);
+  --color-accent: var(--accent);
+  --color-selected: var(--selected);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+
+  --font-display: var(--font-gloock), "Georgia", serif;
+  --font-sans: var(--font-schibsted), system-ui, sans-serif;
+
+  /* Perfect-fourth scale from a 17px body. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.55;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 1.3;
+  --text-2xl: 2rem;
+  --text-2xl--line-height: 1.15;
+  --text-3xl: 2.6875rem;
+  --text-3xl--line-height: 1.05;
+  --text-4xl: 3.5625rem;
+  --text-4xl--line-height: 1;
+  --text-5xl: 5.25rem;
+  --text-5xl--line-height: 0.98;
+
+  --ease-out: var(--ease-out);
+  --ease-drawer: var(--ease-drawer);
+}
+
+@layer base {
+  html {
+    background: var(--ground);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--c-cotton);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Grain: a fixed, non-interactive layer. Cheap (one static SVG). */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Pressable feedback (emil): instant, subtle, transform-only. */
+.press {
+  transition: transform 160ms var(--ease-out);
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+/* Underlined text link that thickens on hover, only where hover exists. */
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-thickness 160ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* Uli line: drawn with stroke-dashoffset, settles, never loops. */
+.uli-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.uli-line[data-accent] {
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* View transitions: the glyph morph between index and case study. */
+::view-transition-group(.morph) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-in-out);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(2px);
+  }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Twin "thinking": the uli wave traces itself while an answer is on its way. */
+.twin-thinking path {
+  stroke-dasharray: 28;
+  animation: twin-think 1.1s linear infinite;
+}
+@keyframes twin-think {
+  from {
+    stroke-dashoffset: 56;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Browser surfaces, themed from the palette. */
+html {
+  scrollbar-color: var(--rule-strong) transparent;
+  caret-color: var(--accent);
+}
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+}
+
+/* Uli line drawing: pathLength=1, so 1 is the whole path. Drawn when [data-drawn] is set. */
+.uli-draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  transition-property: stroke-dashoffset, opacity;
+  transition-timing-function: var(--ease-in-out);
+}
+.uli-draw[data-drawn] path {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .uli-draw path {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transition: none;
+  }
+}
+
+/* Disclosure that animates to its content height with no JS measuring. */
+.disclose {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 280ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+.disclose[data-open] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.disclose > * {
+  overflow: hidden;
+  min-height: 0;
+}

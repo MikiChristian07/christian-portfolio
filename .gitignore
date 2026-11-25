@@ -28,3 +28,18 @@ dist-ssr
 # vscode
 .vscode
 .vercel
+
+# Next.js
+.next
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
+
+# Impeccable runtime
+.impeccable/review
+.impeccable/mocks
+.impeccable/questions
+.impeccable/config.local.json
+
+# Third-party reference boards fetched during direction work (not ours to redistribute)
+.impeccable/reference

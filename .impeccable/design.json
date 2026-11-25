@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-25T16:27:31+00:00",
+  "title": "Design System: Christian Onovo",
+  "extensions": {
+    "colorMeta": {
+      "indigo-night": {
+        "role": "neutral",
+        "displayName": "Indigo Night",
+        "canonical": "#0e1424",
+        "tonalRamp": [
+          "#040509",
+          "#060910",
+          "#090d17",
+          "#0c111f",
+          "#323745",
+          "#6e727c",
+          "#abadb2",
+          "#dbdcde"
+        ]
+      },
+      "indigo-night-raised": {
+        "role": "neutral",
+        "displayName": "Indigo Night Raised",
+        "canonical": "#131a2d",
+        "tonalRamp": [
+          "#05060b",
+          "#090c14",
+          "#0c111d",
+          "#101626",
+          "#363c4c",
+          "#717681",
+          "#acafb6",
+          "#dcdde0"
+        ]
+      },
+      "uli-indigo": {
+        "role": "secondary",
+        "displayName": "Uli Indigo",
+        "canonical": "#2b3a6b",
+        "tonalRamp": [
+          "#0b0e1b",
+          "#131a30",
+          "#1c2646",
+          "#25315b",
+          "#4b5881",
+          "#8089a6",
+          "#b5bacb",
+          "#dfe1e9"
+        ]
+      },
+      "undyed-cotton": {
+        "role": "neutral",
+        "displayName": "Undyed Cotton",
+        "canonical": "#ede6d6",
+        "tonalRamp": [
+          "#3b3a36",
+          "#6b6760",
+          "#9a968b",
+          "#c9c4b6",
+          "#f0eadc",
+          "#f4f0e6",
+          "#f9f6f1",
+          "#fcfbf9"
+        ]
+      },
+      "cotton-raised": {
+        "role": "neutral",
+        "displayName": "Cotton Raised",
+        "canonical": "#e4dcca",
+        "tonalRamp": [
+          "#393732",
+          "#67635b",
+          "#948f83",
+          "#c2bbac",
+          "#e8e1d2",
+          "#efeadf",
+          "#f6f3ec",
+          "#fbfaf7"
+        ]
+      },
+      "ash-muted": {
+        "role": "neutral",
+        "displayName": "Ash Muted",
+        "canonical": "#ada79a",
+        "tonalRamp": [
+          "#2b2a26",
+          "#4e4b45",
+          "#706d64",
+          "#938e83",
+          "#b9b4a9",
+          "#cecac2",
+          "#e2e0dc",
+          "#f3f2f0"
+        ]
+      },
+      "slate-muted": {
+        "role": "neutral",
+        "displayName": "Slate Muted",
+        "canonical": "#545663",
+        "tonalRamp": [
+          "#151619",
+          "#26272d",
+          "#373840",
+          "#474954",
+          "#6e6f7a",
+          "#989aa1",
+          "#c3c4c8",
+          "#e5e6e8"
+        ]
+      },
+      "camwood": {
+        "role": "primary",
+        "displayName": "Camwood",
+        "canonical": "#b2472c",
+        "tonalRamp": [
+          "#2c120b",
+          "#502014",
+          "#742e1d",
+          "#973c25",
+          "#be634c",
+          "#d19180",
+          "#e4bfb5",
+          "#f3e3df"
+        ]
+      },
+      "camwood-lit": {
+        "role": "primary",
+        "displayName": "Camwood Lit",
+        "canonical": "#d0603f",
+        "tonalRamp": [
+          "#341810",
+          "#5e2b1c",
+          "#873e29",
+          "#b15236",
+          "#d7785c",
+          "#e3a08c",
+          "#efc7bc",
+          "#f8e7e2"
+        ]
+      },
+      "camwood-deep": {
+        "role": "primary",
+        "displayName": "Camwood Deep",
+        "canonical": "#a13a22",
+        "tonalRamp": [
+          "#280e08",
+          "#481a0f",
+          "#692616",
+          "#89311d",
+          "#af5843",
+          "#c7897a",
+          "#debab2",
+          "#f1e1de"
+        ]
+      },
+      "overprint": {
+        "role": "primary",
+        "displayName": "Overprint",
+        "canonical": "#4a2a3a",
+        "tonalRamp": [
+          "#120a0e",
+          "#21131a",
+          "#301b26",
+          "#3f2431",
+          "#654a58",
+          "#927f89",
+          "#c0b4ba",
+          "#e4dfe1"
+        ]
+      },
+      "overprint-day": {
+        "role": "primary",
+        "displayName": "Overprint Day",
+        "canonical": "#e2cfc4",
+        "tonalRamp": [
+          "#383431",
+          "#665d58",
+          "#93877f",
+          "#c0b0a7",
+          "#e6d6cd",
+          "#eee2dc",
+          "#f5eeea",
+          "#fbf8f6"
+        ]
+      },
+      "field-day": {
+        "role": "neutral",
+        "displayName": "Field Day",
+        "canonical": "#d9d0bc",
+        "tonalRamp": [
+          "#36342f",
+          "#625e55",
+          "#8d877a",
+          "#b8b1a0",
+          "#dfd7c6",
+          "#e8e3d7",
+          "#f2efe8",
+          "#f9f8f5"
+        ]
+      },
+      "live-green": {
+        "role": "tertiary",
+        "displayName": "Live Green",
+        "canonical": "#7fb08a",
+        "tonalRamp": [
+          "#202c22",
+          "#394f3e",
+          "#53725a",
+          "#6c9675",
+          "#92bc9c",
+          "#b2d0b9",
+          "#d2e3d6",
+          "#ecf3ed"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage headline and case-study titles only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Row names: projects, roles, expertise areas."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text, 38–62ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Metadata, dates (tabular digits), hints. Sentence case."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Presses, reveals, disclosures; UI under 300ms."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "The uli line drawing and the glyph morph."
+      },
+      {
+        "name": "ease-drawer",
+        "value": "cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "Assistant panel open and close (300ms)."
+      },
+      {
+        "name": "press",
+        "value": "transform scale(0.97) 160ms ease-out",
+        "purpose": "Every pressable element."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "1440px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one filled action: Ask, Send message.",
+      "html": "<button class=\"ds-btn-primary\">Ask</button>",
+      "css": ".ds-btn-primary{background:#ede6d6;color:#0e1424;border:0;border-radius:7px;height:44px;padding:0 20px;font:500 1.0625rem 'Schibsted Grotesk',system-ui,sans-serif;transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-btn-primary:active{transform:scale(.97)}.ds-btn-primary:focus-visible{outline:2px solid #d0603f;outline-offset:3px}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary actions: Stop, Close, the key hint.",
+      "html": "<button class=\"ds-btn-quiet\">Stop</button>",
+      "css": ".ds-btn-quiet{background:transparent;color:#ede6d6;border:1px solid rgb(237 230 214/.3);border-radius:7px;height:44px;padding:0 16px;font:400 .9375rem 'Schibsted Grotesk',system-ui,sans-serif;transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-btn-quiet:active{transform:scale(.97)}.ds-btn-quiet:focus-visible{outline:2px solid #d0603f;outline-offset:3px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "description": "Links carry a camwood underline that thickens on hover.",
+      "html": "<a class=\"ds-link\" href=\"#\">Read the Kordy case study</a>",
+      "css": ".ds-link{color:#ede6d6;text-decoration:underline;text-decoration-color:#d0603f;text-decoration-thickness:1px;text-underline-offset:.3em;font:500 1.0625rem 'Schibsted Grotesk',system-ui,sans-serif;transition:text-decoration-thickness 160ms cubic-bezier(.23,1,.32,1)}.ds-link:hover{text-decoration-thickness:2px}.ds-link:focus-visible{outline:2px solid #d0603f;outline-offset:3px;border-radius:2px}"
+    },
+    {
+      "name": "Twin Input",
+      "kind": "input",
+      "refersTo": "input-twin",
+      "description": "The hero question field and composer.",
+      "html": "<form class=\"ds-ask\"><input class=\"ds-ask-input\" placeholder=\"Ask my twin a question\"><button class=\"ds-ask-btn\">Ask</button></form>",
+      "css": ".ds-ask{display:flex;align-items:center;gap:12px;border:1px solid rgb(237 230 214/.3);border-radius:10px;background:#131a2d;padding:8px 8px 8px 20px}.ds-ask:focus-within{border-color:#d0603f}.ds-ask-input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#ede6d6;font:400 1.1875rem 'Schibsted Grotesk',system-ui,sans-serif}.ds-ask-input::placeholder{color:#ada79a}.ds-ask-btn{background:#ede6d6;color:#0e1424;border:0;border-radius:7px;height:44px;padding:0 20px;font:500 1rem 'Schibsted Grotesk',system-ui,sans-serif}"
+    },
+    {
+      "name": "Choice Chip",
+      "kind": "chip",
+      "refersTo": "chip-choice",
+      "description": "Single-choice options (contact reason).",
+      "html": "<span class=\"ds-chip\">A role to fill</span><span class=\"ds-chip ds-chip-on\">A product to build</span>",
+      "css": ".ds-chip{display:inline-block;margin:4px;border:1px solid rgb(237 230 214/.3);border-radius:9999px;padding:8px 16px;color:#ada79a;font:400 .9375rem 'Schibsted Grotesk',system-ui,sans-serif;transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-chip:active{transform:scale(.97)}.ds-chip-on{background:#4a2a3a;border-color:#d0603f;color:#ede6d6}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Muted section links; one camwood hairline under the active one.",
+      "html": "<nav class=\"ds-nav\"><a>Work</a><a class=\"on\">Experience</a><a>Research</a><kbd>Ctrl K</kbd></nav>",
+      "css": ".ds-nav{display:flex;gap:28px;align-items:center;padding:20px 0;border-bottom:1px solid rgb(237 230 214/.14);font:400 .9375rem 'Schibsted Grotesk',system-ui,sans-serif}.ds-nav a{color:#ada79a;padding-bottom:6px;border-bottom:1px solid transparent;transition:color 150ms}.ds-nav a:hover{color:#ede6d6}.ds-nav a.on{color:#ede6d6;border-bottom-color:#d0603f}.ds-nav kbd{margin-left:auto;border:1px solid rgb(237 230 214/.3);border-radius:6px;padding:2px 8px;color:#ada79a;font:inherit;font-size:.8125rem}"
+    },
+    {
+      "name": "Glyph Row",
+      "kind": "custom",
+      "description": "Signature: an authored uli mark, a Gloock name and a muted line, between hairlines.",
+      "html": "<a class=\"ds-glyph-row\" href=\"#\"><svg viewBox=\"0 0 56 56\" width=\"56\" height=\"56\"><path d=\"M8 40C20 8 36 8 48 40\"/><path d=\"M18 30h20\"/><circle cx=\"28\" cy=\"44\" r=\"2.6\"/></svg><span><b>Kordy</b><small>An AI coordinator that finds cover when an event steward cancels.</small></span></a>",
+      "css": ".ds-glyph-row{display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:center;padding:16px 0;border-top:1px solid rgb(237 230 214/.14);border-bottom:1px solid rgb(237 230 214/.14);color:#ede6d6;text-decoration:none;transition:background 200ms}.ds-glyph-row:hover{background:rgb(74 42 58/.4)}.ds-glyph-row svg{color:#d0603f}.ds-glyph-row path{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.ds-glyph-row circle{fill:currentColor}.ds-glyph-row b{display:block;font:400 1.5rem Gloock,Georgia,serif}.ds-glyph-row small{color:#ada79a;font:400 .9375rem 'Schibsted Grotesk',system-ui,sans-serif}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Uli Cipher",
+    "overview": "A record written in Christian's own marks. Every piece of work, role and discipline carries an authored glyph drawn in the manner of uli, the line art of south-eastern Nigeria: single-weight strokes, curves that close on themselves, generous empty space. The twin decodes the record on request. The page is a dyed cloth at night, indigo ground and undyed cotton type, with one camwood line that runs once and settles.\n\nDensity is editorial, not dashboard: wide gutters, hairline rules instead of boxes, one idea per row. Expression is spent in three places only: the Gloock display type, the glyphs, and the single drawn line in the hero. Everything else is quiet so those carry. The system refuses the dark 3D \"Hi, I'm\" developer hero and the cream editorial serif page; it also refuses glowing AI chrome.\n\nThe palette follows London's hour: indigo night by default after dusk, the cotton ground by day, and the visitor can pin either from the command menu.",
+    "keyCharacteristics": [
+      "Indigo-night ground, undyed-cotton type, camwood used only for what is live or selected.",
+      "Gloock for display and headings; Schibsted Grotesk for everything read.",
+      "Hairline rules and full-width rows; no cards, no side stripes, no eyebrow labels.",
+      "One authored line drawing per page; all other motion answers the visitor.",
+      "Grain over everything at 6% (brief-pinned texture)."
+    ],
+    "rules": [
+      {
+        "name": "The One Dye Rule",
+        "body": "Camwood marks what is live or selected and nothing else. If a screen has more than a handful of camwood marks at rest, one of them is decoration; remove it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Field, Not Text Rule",
+        "body": "Uli Indigo fills regions; it never carries words or edges.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Eyebrow Rule",
+        "body": "Headings carry themselves; nothing small sits above them. Status and metadata go below the heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Edge Rule",
+        "body": "A surface gets a border or a tint, never a border and a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep camwood for what is live or selected: the active section, the chosen option, the knot, links, focus (The One Dye Rule).",
+      "**Do** separate content with hairline rules (text colour at 14%) and full-width rows.",
+      "**Do** give every new project, role or area its own uli-style glyph on the 56-unit box at 1.6px, round caps.",
+      "**Do** answer interaction with motion under 300ms on the strong ease-out curve; keep panels and drawers under 500ms.",
+      "**Do** check contrast in both palettes; muted text stays at or above 4.5:1."
+    ],
+    "donts": [
+      "**Don't** put a small label or eyebrow above a heading.",
+      "**Don't** build sections from identical icon-heading-text cards.",
+      "**Don't** add a bar down one side of a box, or a shadow under a bordered surface.",
+      "**Don't** use Uli Indigo for text or edges.",
+      "**Don't** animate on scroll for decoration, add a second drawn line to a page that has one, or animate anything opened from the keyboard (the command menu opens instantly).",
+      "**Don't** use nsibidi or any society's signs as ornament; glyphs are authored, and Christian approves each one."
+    ]
+  }
+}
