@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { AskExperience } from "@/components/twin/ask-experience";
 
 export const metadata: Metadata = {
-  title: "Ask the twin",
-  description: "Talk to Christian Onovo's digital twin about his work, experience and projects.",
+  title: "Ask Miki",
+  description: "Ask Miki, Christian Onovo's personal AI assistant, about his work, experience and projects, or book a call.",
   alternates: { canonical: "/ask" },
 };
 

@@ -72,7 +72,7 @@ export const education = [
 export const expertise: { glyph: GlyphId; title: string; body: string; evidence: { label: string; href: string }[] }[] = [
   { glyph: "engineering", title: "Software engineering", body: "TypeScript, JavaScript, Python and PHP across web and mobile, with React Native for apps.", evidence: [{ label: "Kordy", href: "/work/kordy" }] },
   { glyph: "product", title: "Full-stack and product", body: "Next.js and React on the front, Node, Express and Postgres or MongoDB behind, shipped as products rather than pages.", evidence: [{ label: "Titleflow", href: "/work/titleflow" }] },
-  { glyph: "ai", title: "AI and agents", body: "Tool-using agents with guardrails: read-only tools, human approval, visible failure. This site's twin is one.", evidence: [{ label: "Kordy", href: "/work/kordy" }, { label: "Ask the twin", href: "/ask" }] },
+  { glyph: "ai", title: "AI and agents", body: "Tool-using agents with guardrails: read-only tools, human approval, visible failure. This site's Miki is one.", evidence: [{ label: "Kordy", href: "/work/kordy" }, { label: "Ask Miki", href: "/ask" }] },
   { glyph: "security", title: "Cybersecurity", body: "Ethical hacking, WordPress hardening, and an MSc in Cybersecurity in progress.", evidence: [{ label: "Research", href: "/#research" }] },
   { glyph: "architecture", title: "System architecture", body: "Multi-tenant data models, edge auth, infrastructure as code on AWS.", evidence: [{ label: "Kordy", href: "/work/kordy" }, { label: "Titleflow", href: "/work/titleflow" }] },
   { glyph: "leadership", title: "Technical leadership", body: "CTO at TalaTech: leads teams of three to five, reviews and ships their work.", evidence: [{ label: "Insight Hub", href: "/work/insight-hub" }] },

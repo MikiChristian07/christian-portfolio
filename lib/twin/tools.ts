@@ -1,6 +1,8 @@
 import "server-only";
 import { z } from "zod";
 import type { ChatCompletionFunctionTool } from "openai/resources/chat/completions";
+import { esc, mikiMessage, sendToOwner, telegramConfigured } from "@/lib/miki/telegram";
+import { audit } from "@/lib/miki/store";
 
 /**
  * The Render twin's two tools, unchanged in purpose: both notify Christian
@@ -56,19 +58,28 @@ const userDetails = z.object({
 });
 const unknownQuestion = z.object({ question: z.string().min(1).max(500) });
 
-async function push(message: string) {
+/** Legacy channel, kept only until Telegram is configured (then retired). */
+async function pushover(message: string) {
   const token = process.env.PUSHOVER_TOKEN;
   const user = process.env.PUSHOVER_USER;
-  if (!token || !user) {
-    console.warn("[twin] Pushover not configured; notification skipped");
-    return;
-  }
+  if (!token || !user) return false;
   const res = await fetch("https://api.pushover.net/1/messages.json", {
     method: "POST",
     body: new URLSearchParams({ token, user, message: message.slice(0, 1000) }),
     signal: AbortSignal.timeout(5000),
   });
-  if (!res.ok) console.warn("[twin] Pushover returned", res.status);
+  if (!res.ok) console.warn("[miki] Pushover returned", res.status);
+  return res.ok;
+}
+
+/**
+ * Tell Christian. Telegram when configured, otherwise the old Pushover channel,
+ * so nothing goes quiet during the switch. Every notification is audited.
+ */
+async function notifyOwner(action: string, telegramHtml: string, plain: string) {
+  const sent = telegramConfigured ? (await sendToOwner(telegramHtml)) !== null : await pushover(plain);
+  await audit({ actor: "visitor", action, result: sent ? "ok" : "error", detail: telegramConfigured ? "telegram" : "pushover" });
+  if (!sent) console.warn(`[miki] ${action}: no notification channel succeeded`);
 }
 
 /** Per-request budget: at most one contact record and two unknown questions per call. */
@@ -90,13 +101,25 @@ export function createToolRunner() {
       if (!parsed.success) return "That doesn't look like a valid email address. Ask the user to check it.";
       used[name]++;
       const { email, name: who, notes } = parsed.data;
-      await push(`Recording interest from ${who || "Name not provided"} with email ${email} and notes ${notes || "not provided"}`);
+      await notifyOwner(
+        "notify.contact",
+        mikiMessage("New contact", [
+          `<b>${esc(who || "Name not given")}</b> wants to get in touch.`,
+          `Email: ${esc(email)}`,
+          notes ? `Notes: ${esc(notes)}` : "",
+        ].filter(Boolean)),
+        `Recording interest from ${who || "Name not provided"} with email ${email} and notes ${notes || "not provided"}`,
+      );
       return "OK";
     }
     const parsed = unknownQuestion.safeParse(args);
     if (!parsed.success) return "Invalid arguments";
     used[name]++;
-    await push(`Recording ${parsed.data.question} asked that I couldn't answer`);
+    await notifyOwner(
+      "notify.unknown_question",
+      mikiMessage("Unanswered question", [`A visitor asked something I couldn't answer:`, `<i>${esc(parsed.data.question)}</i>`]),
+      `Recording ${parsed.data.question} asked that I couldn't answer`,
+    );
     return "OK";
   };
 }

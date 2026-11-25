@@ -32,7 +32,7 @@ function clientIp(req: Request) {
 }
 
 export async function POST(req: Request) {
-  // Only this website may call the twin.
+  // Only this website may call Miki.
   if (!sameOrigin(req)) return json(403, { t: "error", code: "invalid", message: "Requests must come from this website." });
 
   const len = Number(req.headers.get("content-length") ?? 0);
@@ -62,13 +62,13 @@ export async function POST(req: Request) {
       limit.reason === "visitor"
         ? "You've asked a lot of questions in a short time. Wait a few minutes, or use the contact form."
         : limit.reason === "daily"
-          ? "The twin has reached today's limit. Everything it knows is on this page, or you can use the contact form."
-          : "The twin is paused right now. Everything it knows is on this page, or you can use the contact form.";
+          ? "Miki has reached today's limit. Everything it knows is on this page, or you can use the contact form."
+          : "Miki is paused right now. Everything it knows is on this page, or you can use the contact form.";
     return json(limit.reason === "visitor" ? 429 : 503, { t: "error", code: limit.reason === "unavailable" ? "unavailable" : "rate_limited", message });
   }
 
   if (!process.env.OPENAI_API_KEY) {
-    return json(503, { t: "error", code: "unavailable", message: "The twin isn't connected right now. Everything it knows is on this page." });
+    return json(503, { t: "error", code: "unavailable", message: "Miki isn't connected right now. Everything it knows is on this page." });
   }
 
   const { openai, posthog, observed } = createTwinClients(process.env.OPENAI_API_KEY);
@@ -125,8 +125,8 @@ export async function POST(req: Request) {
           t: "error",
           code: timeout ? "timeout" : "unavailable",
           message: timeout
-            ? "The twin took too long to answer. Try again."
-            : "The twin couldn't answer just now. Try again, or find the answer on this page.",
+            ? "Miki took too long to answer. Try again."
+            : "Miki couldn't answer just now. Try again, or find the answer on this page.",
         });
       } finally {
         try {

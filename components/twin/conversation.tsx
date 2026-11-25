@@ -27,7 +27,7 @@ export function Thread({ className = "", compact = false }: { className?: string
   // Announce once per finished answer, not on every streamed word (derived during render).
   if (prevStatus !== status) {
     setPrevStatus(status);
-    if (prevStatus === "streaming" && status === "idle") setAnnouncement("The twin has answered.");
+    if (prevStatus === "streaming" && status === "idle") setAnnouncement("Miki has answered.");
     else if (status === "error" && error) setAnnouncement(error.message);
   }
 
@@ -57,7 +57,7 @@ export function Thread({ className = "", compact = false }: { className?: string
 
   return (
     <div className={className}>
-      <ol aria-label="Conversation with Christian's digital twin" aria-busy={status === "streaming"} className={`flex flex-col ${compact ? "gap-5" : "gap-7"}`}>
+      <ol aria-label="Conversation with Miki, Christian's AI assistant" aria-busy={status === "streaming"} className={`flex flex-col ${compact ? "gap-5" : "gap-7"}`}>
         {messages.map((m, i) =>
           m.role === "user" ? (
             <li key={i} data-role="user" className="self-end max-w-[85%] rounded-[10px] bg-ink/[0.07] px-4 py-2.5">
@@ -70,7 +70,7 @@ export function Thread({ className = "", compact = false }: { className?: string
                 <Glyph id="twin" size={24} />
               </span>
               <div className="min-w-0 text-ink-muted [&_strong]:text-ink">
-                <span className="sr-only">Christian&apos;s twin: </span>
+                <span className="sr-only">Miki: </span>
                 <TwinMarkdown>{m.content}</TwinMarkdown>
               </div>
             </li>
@@ -194,7 +194,7 @@ export function Composer({ autoFocus = false, placeholder = "Ask about my work" 
         )}
       </form>
       <div className="mt-2 flex items-center justify-between gap-4 text-xs text-ink-muted">
-        <p>An AI twin: it answers from my real record and says when it doesn&apos;t know. If you share your email, it&apos;s sent to me so I can reply.</p>
+        <p>Miki is my AI assistant: it answers from my real record and says when it doesn&apos;t know. If you share your email, it&apos;s sent to me so I can reply.</p>
         {messages.length > 0 ? (
           <button type="button" onClick={reset} className="link shrink-0 min-h-8">
             New conversation

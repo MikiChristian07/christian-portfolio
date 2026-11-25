@@ -66,7 +66,7 @@ export function Assistant() {
         onPointerEnter={() => void loadPanel()}
         onFocus={() => void loadPanel()}
         aria-expanded={panelOpen}
-        aria-label={panelOpen ? "Close the twin" : "Ask my twin"}
+        aria-label={panelOpen ? "Close Miki" : "Ask Miki"}
         className={`press fixed right-5 bottom-5 z-50 items-center gap-2.5 rounded-full border border-rule-strong bg-ground py-2.5 pr-4 pl-3 sm:right-6 sm:bottom-6 ${panelOpen ? "hidden sm:flex" : heroVisible ? "hidden" : "flex"}`}
       >
         <span className={status === "streaming" ? "text-accent twin-thinking" : "text-accent"}>

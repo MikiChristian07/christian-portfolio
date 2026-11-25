@@ -27,17 +27,17 @@ export function AskExperience({ initialQuestion }: { initialQuestion: string }) 
             <span className="text-accent">
               <Glyph id="twin" size={56} />
             </span>
-            <h1 className="mt-6 font-display text-4xl">Ask my twin</h1>
+            <h1 className="mt-6 font-display text-4xl">Ask Miki</h1>
             <p className="mt-4 max-w-[52ch] text-lg text-ink-muted">
-              It answers as me, from my real record: roles, projects, how I work. When it doesn&apos;t know, it says so and tells
-              me the question.
+              Miki is my personal AI assistant. It answers from my real record: roles, projects, how I work. When it doesn&apos;t
+              know, it says so and passes the question to me.
             </p>
             <div className="mt-8">
               <Suggestions limit={6} />
             </div>
           </div>
         ) : (
-          <h1 className="sr-only">Ask my twin</h1>
+          <h1 className="sr-only">Ask Miki</h1>
         )}
         <Thread />
       </div>

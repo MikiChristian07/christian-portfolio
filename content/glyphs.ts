@@ -34,5 +34,5 @@ export const glyphs: Record<GlyphId, { label: string; paths: string[]; dot?: [nu
   product: { label: "Product engineering", paths: ["M10 44c6-20 14-30 18-30s12 10 18 30", "M20 32h16"] },
   leadership: { label: "Technical leadership", paths: ["M28 8v40", "M14 22l14-14 14 14", "M18 40h20"] },
   chain: { label: "Blockchain and post-quantum security", paths: ["M10 22h14v12H10zM32 22h14v12H32z", "M24 28h8", "M17 22v-6M39 34v6"] },
-  twin: { label: "Digital twin", paths: ["M18 12a10 10 0 1 0 0.1 0", "M38 24a10 10 0 1 0 0.1 0", "M18 22c0 10 20 4 20 14"] },
+  twin: { label: "Miki", paths: ["M18 12a10 10 0 1 0 0.1 0", "M38 24a10 10 0 1 0 0.1 0", "M18 22c0 10 20 4 20 14"] },
 };

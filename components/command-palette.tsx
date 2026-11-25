@@ -14,14 +14,14 @@ import { track } from "@/lib/analytics";
 /**
  * Global Cmd/Ctrl+K palette. Opens and closes with no animation: it is a
  * keyboard tool people reach for repeatedly, so it must feel instant.
- * Anything typed can be asked of the twin directly.
+ * Anything typed can be asked of Miki directly.
  */
 
 /**
  * Word-prefix matching instead of cmdk's fuzzy default, which matched "day"
  * against the letters of "dashboard analytics" and buried the palette options.
  * Every typed word must start a word in the item; earlier words (the name)
- * score higher; the "Ask my twin" fallback always sorts last.
+ * score higher; the "Ask Miki" fallback always sorts last.
  */
 function filter(value: string, search: string) {
   if (value.startsWith("__ask__")) return 0.001;
@@ -105,7 +105,7 @@ export default function CommandPalette({ open, onOpenChange }: { open: boolean; 
         <Command.Input
           value={query}
           onValueChange={setQuery}
-          placeholder="Search the site, or type a question for my twin"
+          placeholder="Search the site, or type a question for Miki"
           className="h-14 w-full bg-transparent text-base outline-none placeholder:text-ink-muted"
         />
         <kbd className="hidden shrink-0 rounded border border-rule-strong px-1.5 py-0.5 font-sans text-xs text-ink-muted sm:block">Esc</kbd>
@@ -126,7 +126,7 @@ export default function CommandPalette({ open, onOpenChange }: { open: boolean; 
             </Item>
           ))}
           <Item value="twin full screen talk ask chat conversation" glyph="twin" onSelect={() => go("/ask")}>
-            Talk to my twin, full screen
+            Talk to Miki, full screen
           </Item>
         </Command.Group>
 
@@ -196,7 +196,7 @@ export default function CommandPalette({ open, onOpenChange }: { open: boolean; 
         {q ? (
           <Command.Group heading="Ask">
             <Item value={`__ask__ ${q}`} forceMount glyph="twin" onSelect={() => ask(q)}>
-              Ask my twin: <span className="text-ink">&ldquo;{q}&rdquo;</span>
+              Ask Miki: <span className="text-ink">&ldquo;{q}&rdquo;</span>
             </Item>
           </Command.Group>
         ) : null}
@@ -206,7 +206,7 @@ export default function CommandPalette({ open, onOpenChange }: { open: boolean; 
         <span>
           <kbd className="font-sans">↑</kbd> <kbd className="font-sans">↓</kbd> to move, <kbd className="font-sans">Enter</kbd> to open
         </span>
-        <span>Questions go to my AI twin</span>
+        <span>Questions go to Miki, my AI assistant</span>
       </div>
     </Command.Dialog>
   );

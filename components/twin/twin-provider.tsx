@@ -166,8 +166,8 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
       }
       fail(
         controller.signal.reason === "timeout"
-          ? { code: "timeout", message: "The twin took too long to answer. Try again." }
-          : { code: "unavailable", message: "The twin couldn't be reached. Check your connection and try again." },
+          ? { code: "timeout", message: "Miki took too long to answer. Try again." }
+          : { code: "unavailable", message: "Miki couldn't be reached. Check your connection and try again." },
       );
       if (!(err instanceof Error)) console.error(err);
     } finally {

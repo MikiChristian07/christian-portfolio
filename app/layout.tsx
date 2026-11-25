@@ -13,7 +13,7 @@ const schibsted = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-schi
 export const metadata: Metadata = {
   metadataBase: new URL(person.url),
   title: { default: `${person.name}: engineer, CTO and ethical hacker`, template: `%s · ${person.name}` },
-  description: `${person.summary} Ask his digital twin anything about his work.`,
+  description: `${person.summary} Ask Miki, his personal AI assistant, anything about his work.`,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

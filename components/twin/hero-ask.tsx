@@ -28,14 +28,14 @@ export function HeroAsk() {
         action="/ask"
         method="get"
         role="search"
-        aria-label="Ask Christian's digital twin"
+        aria-label="Ask Miki, Christian's AI assistant"
         onSubmit={(e) => {
           e.preventDefault();
           ask(text);
         }}
       >
         <label htmlFor="hero-q" className="sr-only">
-          Ask my twin a question
+          Ask Miki a question
         </label>
         <div className="flex items-center gap-3 rounded-[10px] border border-rule-strong bg-ink/[0.04] py-2 pr-2 pl-5 backdrop-blur-sm focus-within:border-accent">
           <input
@@ -45,7 +45,7 @@ export function HeroAsk() {
             autoComplete="off"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Ask my twin a question"
+            placeholder="Ask Miki, my AI assistant"
             className="min-h-11 min-w-0 flex-1 bg-transparent text-lg outline-none placeholder:text-ink-muted"
           />
           <button type="submit" disabled={streaming} className="press min-h-11 rounded-[7px] bg-ink px-5 font-medium text-ground disabled:opacity-60">
@@ -75,7 +75,7 @@ export function HeroAsk() {
       {messages.length === 0 ? (
         <p className="mt-5 flex items-center gap-2.5 text-sm text-ink-muted">
           <span aria-hidden="true" className="size-1.5 rounded-full bg-ok" />
-          An AI twin of me. It answers from my real record and says when it doesn&apos;t know.
+          Miki, my AI assistant, answers from my record and says when it doesn&apos;t know.
         </p>
       ) : (
         <div className="mt-6 border-t border-rule pt-6">

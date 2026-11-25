@@ -110,7 +110,7 @@ export function SiteNav({ onOpenPalette }: { onOpenPalette?: () => void }) {
               aria-current={pathname === "/ask" ? "page" : undefined}
               className={pathname === "/ask" ? "text-ink" : "text-ink-muted transition-colors duration-150 hover:text-ink"}
             >
-              Ask the twin
+              Ask Miki
             </Link>
           </li>
         </ul>
@@ -145,7 +145,7 @@ export function SiteNav({ onOpenPalette }: { onOpenPalette?: () => void }) {
       {menuOpen ? (
         <div id="mobile-menu" className="border-t border-rule px-5 pb-6 md:hidden">
           <ul className="flex flex-col">
-            {[...sections, { id: "ask", label: "Ask the twin" }].map((s) => (
+            {[...sections, { id: "ask", label: "Ask Miki" }].map((s) => (
               <li key={s.id}>
                 <Link
                   href={s.id === "ask" ? "/ask" : onHome ? `#${s.id}` : `/#${s.id}`}

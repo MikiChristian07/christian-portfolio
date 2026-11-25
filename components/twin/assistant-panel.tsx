@@ -30,7 +30,7 @@ export default function AssistantPanel({ onClose }: { onClose: () => void }) {
               <Glyph id="twin" size={24} />
             </span>
             <h2 id="assistant-title" className="font-display text-lg">
-              Ask my twin
+              Ask Miki
             </h2>
             <Link href="/ask" onClick={closePanel} className="link ml-auto text-sm">
               Full screen
@@ -39,7 +39,7 @@ export default function AssistantPanel({ onClose }: { onClose: () => void }) {
               type="button"
               onClick={onClose}
               className="press min-h-11 min-w-11 text-sm text-ink-muted"
-              aria-label="Close the twin"
+              aria-label="Close Miki"
             >
               Close
             </button>
@@ -47,7 +47,7 @@ export default function AssistantPanel({ onClose }: { onClose: () => void }) {
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5">
             {messages.length === 0 ? (
               <p className="mb-5 text-ink-muted">
-                Ask about my roles, projects or how I&apos;d approach yours. I know which page you&apos;re on.
+                Ask Miki about my roles, projects or how I&apos;d approach yours. It knows which page you&apos;re on.
               </p>
             ) : null}
             <Thread compact />
