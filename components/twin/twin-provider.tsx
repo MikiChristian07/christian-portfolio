@@ -126,7 +126,12 @@ export function TwinProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch("/api/twin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ conversationId: conversationIdFor(), messages: trimForRequest(history), context: currentContextId() }),
+        body: JSON.stringify({
+          conversationId: conversationIdFor(),
+          messages: trimForRequest(history),
+          context: currentContextId(),
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }),
         signal: controller.signal,
       });
       if (!res.body) throw new Error("no body");

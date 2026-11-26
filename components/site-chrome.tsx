@@ -7,6 +7,7 @@ import { TwinProvider } from "@/components/twin/twin-provider";
 import { Assistant } from "@/components/twin/assistant";
 import { loadCommandPalette, useCommandPalette } from "@/components/palette-hooks";
 import { initAnalytics } from "@/lib/analytics";
+import { BookingHost } from "@/components/booking/book-call";
 
 const CommandPalette = dynamic(loadCommandPalette, { ssr: false });
 
@@ -26,6 +27,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <SiteNav onOpenPalette={() => setOpen(true)} />
       {children}
       <Assistant />
+      <BookingHost />
       {paletteUsed ? <CommandPalette open={open} onOpenChange={setOpen} /> : null}
     </TwinProvider>
   );

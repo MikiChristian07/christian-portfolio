@@ -23,6 +23,8 @@ type Events = {
   palette_opened: Record<string, never>;
   palette_command: { kind: "navigate" | "project" | "site" | "contact" | "profile" | "palette" | "ask" };
   outbound_click: { target: string };
+  booking_opened: { from: "hero" | "contact" | "palette" | "miki" };
+  booking_submitted: { duration: number; result: "pending" | "unavailable" | "error" };
 };
 
 type PostHogLike = { capture: (event: string, props?: object) => void };

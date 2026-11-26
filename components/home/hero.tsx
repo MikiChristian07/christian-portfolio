@@ -6,6 +6,7 @@ import { Glyph } from "@/components/glyph";
 import { UliLine } from "@/components/uli-line";
 import { HeroAsk } from "@/components/twin/hero-ask";
 import { HeroHeadline } from "@/components/home/hero-headline";
+import { BookCallLink } from "@/components/booking/book-call";
 
 export function Hero() {
   return (
@@ -61,6 +62,11 @@ export function Hero() {
               <Link href="#contact" className="link">
                 Start a project
               </Link>
+            </li>
+            <li>
+              <BookCallLink from="hero" className="link">
+                Book a call
+              </BookCallLink>
             </li>
           </ul>
         </div>

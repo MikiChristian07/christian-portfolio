@@ -66,3 +66,28 @@ export async function sendToOwner(html: string, buttons?: InlineButton[][]): Pro
 export function mikiMessage(title: string, lines: string[]) {
   return [`<b>Miki — ${esc(title)}</b>`, "", ...lines].join("\n");
 }
+
+/** Low-level Bot API call (owner chat operations: answer button taps, edit cards). */
+export async function tgApi(method: string, payload: Record<string, unknown>) {
+  if (!token) return null;
+  try {
+    const res = await fetch(`${apiBase}/bot${token}/${method}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(8000),
+    });
+    const body = (await res.json().catch(() => null)) as { ok?: boolean; description?: string; result?: unknown } | null;
+    if (!body?.ok) console.error(`[miki] Telegram ${method} failed`, body?.description);
+    return body;
+  } catch (err) {
+    console.error(`[miki] Telegram ${method} error`, err instanceof Error ? err.message : err);
+    return null;
+  }
+}
+
+/** Owner identity, checked in code before anything else runs. */
+export function isOwner(fromId: number | undefined, chatId: number | undefined) {
+  const user = real(process.env.OWNER_TELEGRAM_USER_ID);
+  return Boolean(user && ownerChat && String(fromId) === user && String(chatId) === ownerChat);
+}

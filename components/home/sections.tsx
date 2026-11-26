@@ -8,6 +8,7 @@ import { UliLine } from "@/components/uli-line";
 import { WorkRow } from "@/components/home/work-row";
 import { ContactForm } from "@/components/home/contact-form";
 import { TrackedLink } from "@/components/tracked-link";
+import { BookCallLink } from "@/components/booking/book-call";
 
 function SectionHead({ id, title, intro }: { id: string; title: string; intro?: string }) {
   return (
@@ -229,6 +230,14 @@ export function ContactSection() {
               </dd>
             </div>
             <div>
+              <dt className="text-sm text-ink-muted">Call</dt>
+              <dd>
+                <BookCallLink from="contact" className="link">
+                  Book a 30 or 60-minute call
+                </BookCallLink>
+              </dd>
+            </div>
+            <div>
               <dt className="text-sm text-ink-muted">Elsewhere</dt>
               <dd className="flex gap-6">
                 <TrackedLink href={person.links.linkedin} kind="linkedin" className="link" rel="me noopener">
@@ -254,7 +263,10 @@ export function SiteFooter() {
     <footer className="border-t border-rule">
       <div className={`${shell} flex flex-col gap-3 py-10 text-sm text-ink-muted md:flex-row md:justify-between`}>
         <p>
-          {person.name}, {person.location}.
+          {person.name}, {person.location}.{" "}
+          <Link href="/privacy" className="link">
+            Privacy
+          </Link>
         </p>
         <p>The marks on this site were drawn for it, after uli line work from south-eastern Nigeria.</p>
       </div>

@@ -12,7 +12,7 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 const MODEL = process.env.OPENAI_MODEL ?? "gpt-5.4-mini";
-const MAX_TOOL_ROUNDS = 3;
+const MAX_TOOL_ROUNDS = 4;
 
 const json = (status: number, body: TwinEvent) =>
   new Response(JSON.stringify(body) + "\n", { status, headers: { "Content-Type": "application/x-ndjson" } });
@@ -75,9 +75,9 @@ export async function POST(req: Request) {
   // Flush analytics after the response has finished streaming, never in its way.
   if (posthog) after(() => posthog.shutdown().catch(() => {}));
   const extra = observed ? monitoringParams(randomUUID(), parsed.data.conversationId, parsed.data.context) : {};
-  const runTool = createToolRunner();
+  const runTool = createToolRunner({ ip: clientIp(req) });
   const messages: ChatCompletionMessageParam[] = [
-    { role: "system", content: systemPrompt(describeContext(parsed.data.context)) },
+    { role: "system", content: systemPrompt(describeContext(parsed.data.context), parsed.data.timeZone ?? null) },
     ...parsed.data.messages,
   ];
 
