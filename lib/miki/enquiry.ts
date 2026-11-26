@@ -14,7 +14,12 @@ export type Enquiry = {
   organisation: string | null;
   message: string;
   telegramMessageId: number | null;
+  /** Gmail thread of Christian's reply, once he has sent one. */
+  gmailThreadId?: string;
 };
+
+const K = { enq: (id: string) => `miki:enq:${id}`, recent: "miki:enq:recent" };
+const RETENTION = 90 * 24 * 3600;
 
 const KINDS: Record<Enquiry["kind"], string> = {
   project: "Project",
@@ -39,9 +44,36 @@ export async function saveEnquiry(e: Omit<Enquiry, "id" | "createdAt" | "telegra
         "",
         `<i>Enquiry ${esc(id.slice(0, 6))}</i>`,
       ].filter(Boolean)),
+      [[{ text: "✉️ Reply by email", callback_data: `rpe:${id}` }]],
     );
   }
-  if (redis) await redis.set(`miki:enq:${id}`, enquiry, { ex: 90 * 24 * 3600 });
+  if (redis) {
+    await redis.set(K.enq(id), enquiry, { ex: RETENTION });
+    await redis.zadd(K.recent, { score: Date.now(), member: id });
+    await redis.zremrangebyrank(K.recent, 0, -201);
+  }
   await audit({ actor: "visitor", action: "enquiry.submit", subject: id, result: enquiry.telegramMessageId || !telegramConfigured ? "ok" : "error", detail: e.kind });
   return enquiry;
 }
+
+export async function getEnquiry(id: string) {
+  if (!redis || !/^[0-9a-f]{16}$/.test(id)) return null;
+  return redis.get<Enquiry>(K.enq(id));
+}
+
+/** Newest first, optionally one kind ("the latest recruitment enquiry"). */
+export async function recentEnquiries(limitN = 10, kind?: Enquiry["kind"]) {
+  if (!redis) return [];
+  const ids = await redis.zrange<string[]>(K.recent, 0, 49, { rev: true });
+  const rows = await Promise.all(ids.map((id) => getEnquiry(id)));
+  return rows.filter((e): e is Enquiry => !!e && (!kind || e.kind === kind)).slice(0, limitN);
+}
+
+export async function attachEnquiryThread(id: string, threadId: string) {
+  const e = await getEnquiry(id);
+  if (!e || !redis || e.gmailThreadId === threadId) return;
+  const ttl = await redis.ttl(K.enq(id));
+  await redis.set(K.enq(id), { ...e, gmailThreadId: threadId }, { ex: ttl > 0 ? ttl : RETENTION });
+}
+
+export const enquiryLabel = (kind: Enquiry["kind"]) => KINDS[kind];
