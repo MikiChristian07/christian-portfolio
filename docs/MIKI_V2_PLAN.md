@@ -210,7 +210,13 @@ No raw IPs are stored (rate-limit keys are short-lived), and no visitor details 
 
 1. **Rebrand and storage:** Miki copy and prompt, the Redis store and audit log, a Telegram notifier replacing Pushover. *Needs: Telegram bot created.*
 2. **Scheduling:** Google OAuth via Telegram link, FreeBusy, the booking service, the Book a call dialog, email verification codes via Gmail. *Needs: Google Cloud project and OAuth client.*
-3. **Telegram:** webhook, approval cards, owner agent, commands, confirm-before-execute.
+3. **Telegram:** webhook, approval cards, owner agent, commands, confirm-before-execute. *Built:*
+   - `lib/miki/owner/`: the owner agent (`agent.ts`), private tools (`tools.ts`) and pending actions (`actions.ts`, `miki:action:{nonce}`, run once via GETDEL on your tap).
+   - The model writes only email bodies; recipients come from the request or enquiry record, and every card is rendered by code from the stored action.
+   - Reschedule: the button offers three free times; plain English offers any free time. The visitor confirms at `/api/booking/reschedule` (GET only shows the offer, so link scanners can't book; a same-origin POST books it).
+   - Reply by email on request and enquiry cards; replies reuse one Gmail thread per record and record `miki:thread:{id}` for phase 4.
+   - Commands: /pending, /meetings, /settings, /visitors (phase 5), /reset, /connect_google, /help.
+   - Ambiguity is resolved by Miki asking in text; `send_approved_email` is the Send button, not a model tool; `get_managed_email_thread` arrives with phase 4.
 4. **Gmail:** owner-approved replies, thread mapping, reply polling relayed to Telegram, failure handling.
 5. **Visitor milestones:** PostHog query, ticks (GitHub Actions, traffic, cron), preferences, owner opt-out. *Needs: PostHog personal API key.*
 6. **Tests:**
