@@ -3,7 +3,7 @@ export const suggestedQuestions = [
   "What's his role at TalaTech?",
   "Has he led engineering teams?",
   "How does Kordy work?",
+  "Can I book a call with him?",
   "What's his cybersecurity background?",
-  "Which languages and tools does he use?",
   "How can I contact him?",
 ] as const;

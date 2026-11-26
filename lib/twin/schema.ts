@@ -21,6 +21,19 @@ export const twinRequest = z.object({
     .max(LIMITS.maxMessages)
     .refine((m) => m.at(-1)?.role === "user", "The last message must be from the user"),
   context: z.string().max(80).optional(),
+  /** Visitor's IANA time zone from the browser, for showing meeting times. Validated. */
+  timeZone: z
+    .string()
+    .max(64)
+    .refine((t) => {
+      try {
+        new Intl.DateTimeFormat("en-GB", { timeZone: t });
+        return true;
+      } catch {
+        return false;
+      }
+    })
+    .optional(),
 });
 
 export type TwinRequest = z.infer<typeof twinRequest>;

@@ -10,6 +10,7 @@ import { Glyph } from "@/components/glyph";
 import { applyPalette, type PaletteChoice } from "@/components/palette-script";
 import type { GlyphId } from "@/content/glyphs";
 import { track } from "@/lib/analytics";
+import { openBooking } from "@/components/booking/book-call";
 
 /**
  * Global Cmd/Ctrl+K palette. Opens and closes with no animation: it is a
@@ -163,6 +164,9 @@ export default function CommandPalette({ open, onOpenChange }: { open: boolean; 
             hint={copied ? "Copied" : person.contact.email}
           >
             {copied ? "Email address copied" : "Copy my email address"}
+          </Item>
+          <Item value="book call meeting schedule appointment calendar" onSelect={() => { close(); openBooking("palette"); }}>
+            Book a call with me
           </Item>
           <Item value="write email message send" onSelect={() => go("/#contact")}>
             Send me a message
